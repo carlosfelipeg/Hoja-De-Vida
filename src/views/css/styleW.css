@@ -1,0 +1,323 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	font-family: arial;
+}
+
+a:focus, button:focus
+{
+	outline: none;
+}
+
+.footer-creditos
+{
+	display: block;
+	color: white;
+	font-weight: bold;
+	margin-top: 1em;
+	text-align: center;
+	text-decoration: none;
+}
+
+a{ text-decoration: none; }
+
+body{
+	background-color: #5562fc;
+}
+
+.contenedor-welcome
+{
+	overflow: hidden;
+	border-radius: 20px;
+	margin: 0 auto;
+	width: 450px;
+
+	-webkit-box-shadow: -7px 8px 15px 1px rgba(0,0,0,0.17);
+	-moz-box-shadow: -7px 8px 15px 1px rgba(0,0,0,0.17);
+	box-shadow: -7px 8px 15px 1px rgba(0,0,0,0.17);
+}
+
+.art-reg
+{
+	display: block;
+	background-color: white;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.div-reg-one
+{
+	display: flex;
+	grid-template-columns: 50% 50%;
+	margin: 0 auto;
+	position: relative;
+	width: 380px;
+}
+
+.contenedor-circle-reg
+{
+	position: relative;
+	height: 40px;
+	width: 40px;
+}
+
+.contenedor-circle-reg-2
+{
+	position: relative;
+	height: 40px;
+	width: 20px;
+}
+
+.div-reg-two
+{
+	margin: 0 auto;
+	padding: 2.5em 0;
+	text-align: center;
+	width: 80%;
+}
+
+.title-contenedor
+{
+	font-size: 18px;
+	margin: 0 0 1.5em 0;
+}
+
+.campoTxt
+{
+	border: 0px;
+	border-bottom: 2px solid #999999;
+	display: block;
+	margin-bottom: .4em; 
+	font-size: 18px;
+	padding: .6em 0;
+	width: 100%;
+}
+
+.btn-azul
+{
+	position: relative;
+	display: inline-block;
+	width: 180px;
+}
+
+.circle-blanco-reg
+{
+	background-color: white;
+	border-radius: 30px;
+	height: 40px;
+	position: relative;
+	width: 40px;
+	z-index: 1;
+}
+
+
+.circle-blanco-reg-2
+{
+	background-color: white;
+	border-radius: 30px 0 30px 0;
+	height: 40px;
+	position: relative;
+	width: 20px;
+	z-index: 1;
+}
+
+.circle-blanco-reg-2-login
+{
+	background-color: white;
+	border-radius: 0 30px 0 30px;
+	height: 40px;
+	position: relative;
+	width: 20px;
+	z-index: 1;
+}
+
+.btn-cuadrado-blue-reg
+{
+	position: absolute;
+	top: 0;
+	background-color: #5562fc;
+	height: 20px;
+	width: 130px;
+}
+
+
+.cuadrado-azul-reg
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #5562fc;
+	width: 20px;
+	height: 20px;
+}
+
+.cuadrado-blanco-reg
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: white;
+	width: 20px;
+	height: 20px;
+}
+
+
+.cuadrado-azul-reg-2
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #5562fc;
+	width: 20px;
+	height: 20px;
+}
+
+.contenedor-btn-circle
+{
+	position: relative;
+	width: 190px;
+	display: flex;
+	grid-template-columns: 40px 130px 40px;
+}
+
+.contenedor-btn-circle-2
+{
+	position: relative;
+	width: 170px;
+	display: flex;
+	grid-template-columns: 40px 130px 40px;
+}
+
+.btn-azul-reg
+{
+	position: relative;
+	width: 130px;
+}
+
+.campoTxt:focus
+{
+	background-color: #f2f2f2;
+	outline: none;
+}
+
+.div-reg-three
+{
+	margin: 0 auto;
+	width: 260px;
+	display: flex;
+	grid-template-columns: 10% 80% 10%;
+}
+
+.btn-continuar
+{
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	height: 40px;
+	cursor: pointer;
+	border: 0px;
+	background-color: #5562fc;
+	border-radius: 20px;
+	transition: .8s;
+}
+
+.gris
+{
+	background-color: white;
+}
+
+
+
+.btn-rl
+{
+	background-color: white;
+	border: 0px;
+	border-radius: 20px;
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	height: 40px;
+	position: relative;
+	transition: .8s;
+	z-index: 1;
+	width: 100%;
+}
+
+.active-btn
+{
+	background-color: #5562fc;
+}
+
+.btn-rl:hover
+{
+	transform: translateY(10%);
+	background-color: #f2f2f2;
+}
+
+.active-btn:hover
+{
+	background-color: #7299fc;
+}
+
+.btn-continuar:hover
+{
+	transform: translateY(-10%);
+	background-color: #7299fc;
+}
+
+.blanco-azul
+{
+	position: relative;
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+}
+
+.circle-blanco
+{
+	position: relative;
+	z-index: 1;
+	border-radius: 30px;
+	background-color: white;
+	height: 40px;
+	width: 40px;
+}
+
+.cuadro-azul
+{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 20px;
+	height: 20px;
+	background-color: #5562fc;
+}
+
+.txtNegro
+{
+	color: #424242;
+}
+
+.cuadro-azul-2
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	background-color: #5562fc;
+}
+
+.cuadro-azul-grande
+{
+	position: absolute;
+	bottom: 0;
+	width: 180px;
+	height: 20px;
+	background-color: #5562fc;
+}

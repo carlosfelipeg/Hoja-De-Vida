@@ -1,0 +1,48 @@
+{
+  "name": "hoja-de-vida",
+  "version": "1.0.0",
+  "description": "Aplicacion web usada para crear y editar la hoja de vida de tadores publicos",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosfelufps/Hoja-De-Vida.git"
+  },
+  "keywords": [
+    "hoja",
+    "de",
+    "vida"
+  ],
+  "author": "UFPS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlosfelufps/Hoja-De-Vida/issues"
+  },
+  "homepage": "https://github.com/carlosfelufps/Hoja-De-Vida#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-multiparty": "^2.2.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-myconnection": "^1.0.4",
+    "express-mysql-session": "^2.1.0",
+    "express-session": "^1.17.0",
+    "express-validator": "^6.2.0",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "multiparty": "^4.2.1",
+    "mysql": "^2.17.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
