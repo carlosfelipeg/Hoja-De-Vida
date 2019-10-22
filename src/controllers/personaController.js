@@ -3,9 +3,10 @@ var bcrypt = require('bcryptjs');
 var fs = require('fs');
 var path = require('path');
 var jwt=require('../../services/jwt');
+
 function saveUser(req, res) {
     var params = req.body;
-    console.log(params);
+   //  console.log(params);
     //creo el usuario que voy a guardar
     var user = new Object();
     if (params.documento && params.nombre && params.apellido&& params.email && params.password ) {
@@ -21,7 +22,9 @@ function saveUser(req, res) {
                 user.password = hash;
                 req.getConnection((err, conn) => {
                     conn.query('INSERT INTO persona set ?', [user], (err, persona) => {
-                        res.render('html/login');
+                        res.render('html/login',{
+                            message:'Registrado Correctamente'
+                        });
                     });
                 });
             });
@@ -32,13 +35,11 @@ function saveUser(req, res) {
 }
 
 function inicio(req,res){
-    res.render('html/registro');
+    return  res.render('html/registro');
 }
 
 function iniciar(req,res){
-    res.render('html/login',{
-        hola:'prueba'
-    });
+    return res.render('html/login');
 }
 
 function login(req, res) {
@@ -50,22 +51,33 @@ function login(req, res) {
         req.getConnection((err,conn)=>{
             var sql = 'SELECT * FROM persona WHERE documento = ?';
             conn.query(sql,[String(documento)],(err, user)=>{
-                console.log(user[0].email);
+                    console.log(user.length);
+                if(user.length==0){
+                    return  res.status(200).render('html/login',{
+                        message:'Documento No Registrado'
+                    });
+                }
                 bcrypt.compare(password, user[0].password, (err, check)=>{//comparo la del POST con la encriptada
                     if(check){
-                         user.password=undefined;//elimino la contraseña de los datos que retorno
+                         user[0].password=undefined;//elimino la contraseña de los datos que retorno
                          //devolver datos de usuario
-                         if(params.gettoken){
-                              //generar y devolver token
-                              return res.status(200).send({
-                                  token: jwt.createToken(user)
-                              });
-        
+                         console.log(user[0].nombre);
+                         if(params.gettoken){//Cambiar
+                             //generar y devolver token
+                             
+                             return  res.status(200).render('html/index',{
+                                token: jwt.createToken(user),
+                                user:user[0]
+                            });
                          }else{
-                            return res.status(200).send({user});
+                            return  res.status(200).render('html/index',{
+                                user:user[0]
+                            });
                          }
                     }else{
-                          res.status(404).send({message:'El usuario no se ha podido identificar'});
+                        return  res.status(200).render('html/login',{
+                            message:'Documento o Contraseña Incorrecta'
+                        });
                     }
                   });
             });

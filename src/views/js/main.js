@@ -55,6 +55,7 @@ $(document).ready(function() {
 		$('#add-clon').on('click', addClon);
 		$('#add-clon-dos').on('click', addClonDos);
 		$('#add-clon-3').on('click', addClon3);
+		$('#add-clon-4').on('click', addClon4);
 	});
 
 	function addClon() {
@@ -73,4 +74,9 @@ $(document).ready(function() {
 		$('#contenedor-clon').append(requirement3);
 	}
 
+	function addClon4() {
+		console.log('hi');
+		var requirement4 = $('#tab4').html();
+		$('#contenedor-clon').append(requirement4);
+	}
 });
