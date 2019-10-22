@@ -1,80 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<title>Registrar</title>
 	<link rel="stylesheet" type="text/css" href="../css/styleW.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script src="../js/main.js"></script>
+
+	<script src="../plugins/sweetAlert2/sweetalert2.all.min.js"></script>
+	<script src="../js/alerta.js"></script>
 </head>
+
 <body>
-<div style="height: 18vh; width: 100%;"></div>
-<section class="contenedor-welcome">
+	<div style="height: 18vh; width: 100%;"></div>
+	<section class="contenedor-welcome">
 
-	<article class="art-reg">
-		<div class="div-reg-one">
-			<div class="contenedor-btn-circle">
-				<div class="contenedor-circle-reg">
-					<div class="circle-blanco-reg"></div>
-					<div class="cuadrado-azul-reg"></div>
+		<article class="art-reg">
+			<div class="div-reg-one">
+				<div class="contenedor-btn-circle">
+					<div class="contenedor-circle-reg">
+						<div class="circle-blanco-reg"></div>
+						<div class="cuadrado-azul-reg"></div>
+					</div>
+					<div class="btn-azul-reg">
+						<a style="color: white" href="./"><button class="btn-rl active-btn">Registrar</button></a>
+						<div class="btn-cuadrado-blue-reg"></div>
+					</div>
+					<div class="contenedor-circle-reg-2">
+						<div class="circle-blanco-reg-2"></div>
+						<div class="cuadrado-azul-reg-2"></div>
+					</div>
 				</div>
-				<div class="btn-azul-reg">
-					<a style="color: white" href="./"><button class="btn-rl active-btn">Registrar</button></a>
-					<div class="btn-cuadrado-blue-reg"></div>						
-				</div>
-				<div class="contenedor-circle-reg-2">
-					<div class="circle-blanco-reg-2"></div>
-					<div class="cuadrado-azul-reg-2"></div>
+				<div class="contenedor-btn-circle-2">
+					<div class="btn-azul-reg">
+						<a href="./inicio"><button class="btn-rl txtNegro">Inicar sesión</button></a>
+						<div class="btn-cuadrado-blue-reg gris"></div>
+					</div>
+					<div class="contenedor-circle-reg">
+						<div class="circle-blanco-reg"></div>
+						<div class="cuadrado-azul-reg-2 gris"></div>
+					</div>
 				</div>
 			</div>
-			<div class="contenedor-btn-circle-2">
-				<div class="btn-azul-reg">
-					<a href="./inicio"><button class="btn-rl txtNegro">Inicar sesión</button></a>
-					<div class="btn-cuadrado-blue-reg gris"></div>	
+
+			<form method="POST" action="./registro">
+				<div class="div-reg-two">
+					<p class="title-contenedor">Complete los siguientes campos.</p>
+					<input id="documento" class="campoTxt" type="number" placeholder="Documento" name="documento">
+					<input id="nombre" class="campoTxt" type="text" placeholder="Nombres" name="nombre">
+					<input id="apellido" class="campoTxt" type="text" placeholder="Apellidos" name="apellido">
+					<input id="email" class="campoTxt" type="email" placeholder="Correo" name="email">
+					<input id="password" class="campoTxt" type="password" placeholder="Contraseña" name="password">
 				</div>
-				<div class="contenedor-circle-reg">
-					<div class="circle-blanco-reg"></div>
-					<div class="cuadrado-azul-reg-2 gris"></div>
+				<% if (typeof message != "undefined") { %>
+				<div>
+					<script type="text/javascript">alerta('<%=message%>');</script>
 				</div>
-			</div>
-		</div>
+				<% } %>
 
-		<form method="POST" action="./registro">
-		<div class="div-reg-two">
-			<p class="title-contenedor">Complete los siguientes campos.</p>
-			<input id="documento"  class="campoTxt" type="number" placeholder="Documento" name="documento">
-			<input id="nombre" class="campoTxt" type="text" placeholder="Nombres" name="nombre">
-			<input id="apellido"  class="campoTxt" type="text" placeholder="Apellidos" name="apellido">
-			<input id="email"  class="campoTxt" type="email" placeholder="Correo" name="email">
-			<input id="password"  class="campoTxt" type="password" placeholder="Contraseña" name="password">
-		</div>
+				<div class="div-reg-three">
+					<div class="blanco-azul">
+						<div class="circle-blanco"></div>
+						<div class="cuadro-azul"></div>
+					</div>
+					<div class="btn-azul">
+						<button type="submit" formmethod="post" class="btn-continuar">CONTINUAR</button>
+						<div class="cuadro-azul-grande"></div>
+					</div>
+					<div class="blanco-azul">
+						<div class="circle-blanco"></div>
+						<div class="cuadro-azul-2"></div>
+					</div>
+				</div>
+			</form>
 
-		<div class="div-reg-three">
-			<div class="blanco-azul">
-				<div class="circle-blanco"></div>
-				<div class="cuadro-azul"></div>
-			</div>
-			<div class="btn-azul">
-				<button type="submit" formmethod="post" class="btn-continuar">CONTINUAR</button>
-				<div class="cuadro-azul-grande"></div>	
-			</div>
-			<div class="blanco-azul">
-				<div class="circle-blanco"></div>
-				<div class="cuadro-azul-2"></div>
-			</div>
-		</div>
-	</form>
+		</article>
 
-	</article>
 
-	
-</section>
+	</section>
 
-<a class="footer-creditos" href="">TEAM #SIAWEB</a>
+	<a class="footer-creditos" href="">TEAM #SIAWEB</a>
 
 
 </body>
+
 </html>

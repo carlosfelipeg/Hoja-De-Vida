@@ -22,7 +22,12 @@ function saveUser(req, res) {
                 user.password = hash;
                 req.getConnection((err, conn) => {
                     conn.query('INSERT INTO persona set ?', [user], (err, persona) => {
-                        res.render('html/login',{
+                        if(!persona){
+                            return res.render('html/registro',{
+                                message:'Documento ya existe'
+                            });  
+                        }
+                         return res.render('html/login',{
                             message:'Registrado Correctamente'
                         });
                     });
@@ -54,7 +59,8 @@ function login(req, res) {
                     console.log(user.length);
                 if(user.length==0){
                     return  res.status(200).render('html/login',{
-                        message:'Documento No Registrado'
+                        message:'Documento No Registrado',
+                        flag:false
                     });
                 }
                 bcrypt.compare(password, user[0].password, (err, check)=>{//comparo la del POST con la encriptada
@@ -67,7 +73,7 @@ function login(req, res) {
                              
                              return  res.status(200).render('html/index',{
                                 token: jwt.createToken(user),
-                                user:user[0]
+                                user:user[0],
                             });
                          }else{
                             return  res.status(200).render('html/index',{
@@ -76,7 +82,7 @@ function login(req, res) {
                          }
                     }else{
                         return  res.status(200).render('html/login',{
-                            message:'Documento o Contraseña Incorrecta'
+                            message:'Documento o Contraseña Incorrecta',
                         });
                     }
                   });
