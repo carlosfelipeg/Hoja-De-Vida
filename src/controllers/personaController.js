@@ -15,7 +15,17 @@ function saveUser(req, res) {
         user.nombre = params.nombre;
         user.apellido = params.apellido;
         user.email = params.email;
-
+        //valido en mi BD que no exista un registro con el mismo email
+        req.getConnection((err,conn)=>{
+        var sql = 'SELECT * FROM persona WHERE email = ?';
+            conn.query(sql,[String(user.email)],(err, user)=>{
+                if(user.length>=1){
+                    return  res.status(200).render('html/registro',{
+                        message:'Email ya existe, intenta ingresando otro E-mail',
+                    });
+                }
+            });
+        });
         //Crifro la password  
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(String(params.password), salt, function(err, hash) {
@@ -23,11 +33,11 @@ function saveUser(req, res) {
                 req.getConnection((err, conn) => {
                     conn.query('INSERT INTO persona set ?', [user], (err, persona) => {
                         if(!persona){
-                            return res.render('html/registro',{
+                            return res.status(200).render('html/registro',{
                                 message:'Documento ya existe'
                             });  
                         }
-                         return res.render('html/login',{
+                         return res.status(200).render('html/login',{
                             message:'Registrado Correctamente'
                         });
                     });
@@ -35,16 +45,10 @@ function saveUser(req, res) {
             });
         });
     }else{
-        return inicio(req, res);
+        return res.status(200).render('html/registro',{
+            message:'Debes completar todos los campos'
+        }); 
     }
-}
-
-function inicio(req,res){
-    return  res.render('html/registro');
-}
-
-function iniciar(req,res){
-    return res.render('html/login');
 }
 
 function login(req, res) {
@@ -59,8 +63,7 @@ function login(req, res) {
                     console.log(user.length);
                 if(user.length==0){
                     return  res.status(200).render('html/login',{
-                        message:'Documento No Registrado',
-                        flag:false
+                        message:'Documento No Registrado'
                     });
                 }
                 bcrypt.compare(password, user[0].password, (err, check)=>{//comparo la del POST con la encriptada
@@ -91,7 +94,5 @@ function login(req, res) {
 }
 module.exports = {
     saveUser,
-    login,
-    inicio,
-    iniciar
+    login
 }
