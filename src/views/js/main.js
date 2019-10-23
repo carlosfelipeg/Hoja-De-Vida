@@ -54,9 +54,12 @@ $(document).ready(function() {
 		// Cuando cargue la pagina cargue con el click llame a la funcion addClon
 		$('#add-clon').on('click', addClon);
 		$('#add-clon-dos').on('click', addClonDos);
-		$('#add-clon-3').on('click', addClon3);
-		$('#add-clon-4').on('click', addClon4);
+		$('#add-clon-4').on('click', addClon3);
 	});
+
+	function returnEstudiosSuperiores(contEstudiosSuperiores) {
+		var articule1 = document.createElement('article');
+	}
 
 	function addClon() {
 		var requirement = $('#clon').html();
@@ -70,13 +73,8 @@ $(document).ready(function() {
 	}
 
 	function addClon3() {
-		var requirement3 = $('#clon-3').html();
+		var requirement3 = $('#clon-tres').html();
 		$('#contenedor-clon').append(requirement3);
 	}
 
-	function addClon4() {
-		console.log('hi');
-		var requirement4 = $('#tab4').html();
-		$('#contenedor-clon').append(requirement4);
-	}
 });

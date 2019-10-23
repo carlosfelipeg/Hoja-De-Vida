@@ -42,6 +42,31 @@ async function enviarMail(email,nombre,apellido) {
 }
 
 enviarMail().catch();
+function subirFoto(req, res){
+    if(req.files){
+        var file_name= req.files.file.name;
+        console.log('hola '+file_name);
+        console.log(req.body);
+        var ext_split=file_name.split('\.');
+        console.log(ext_split);
+        var file_ext  = ext_split[1];
+        console.log(file_ext);
+
+
+        if(file_ext=='png'|| file_ext=='jpg'|| file_ext=='jpeg'|| file_ext=='gif'){
+           let EDFile = req.files.file;
+            EDFile.mv(`./src/public/files/${EDFile.name}`,err => {
+                if(err) return res.status(500).send({ message : err })
+                 //GUARDO EN LA  BD LA REFERENCIA
+                return res.status(200).send({ message : 'File upload' })
+            });
+            }else{
+               return removeFiles(res, file_path, 'Extension no valida');
+        }
+    }else{
+        return res.status(200).send({message: 'No se ha subido una imagen'});
+    }
+}
 
 function saveUser(req, res) {
     var params = req.body;
@@ -101,7 +126,6 @@ function login(req, res) {
         req.getConnection((err,conn)=>{
             var sql = 'SELECT * FROM persona WHERE documento = ?';
             conn.query(sql,[String(documento)],(err, user)=>{
-                    console.log(user.length);
                 if(user.length==0){
                     return  res.status(200).render('html/login',{
                         message:'Documento No Registrado'
@@ -111,10 +135,8 @@ function login(req, res) {
                     if(check){
                          user[0].password=undefined;//elimino la contraseña de los datos que retorno
                          //devolver datos de usuario
-                         console.log(user[0].nombre);
                          if(params.gettoken){//Cambiar
                              //generar y devolver token
-                             
                              return  res.status(200).render('html/index',{
                                 token: jwt.createToken(user),
                                 user:user[0],
@@ -135,5 +157,6 @@ function login(req, res) {
 }
 module.exports = {
     saveUser,
-    login
+    login,
+    subirFoto
 }
