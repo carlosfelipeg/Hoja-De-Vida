@@ -208,6 +208,15 @@ section
 	grid-template-columns: 40% 60%; 
 }
 
+.ilblck-btn
+{
+	width: 100%;
+	display: grid;
+	align-items: center;
+	margin: 0 0 1em 0;
+	grid-template-columns: 40% 40% 20%; 
+}
+
 .middle
 {
 	grid-template-columns: 60% 10% 30%;
@@ -228,14 +237,126 @@ section
 	justify-content: flex-end;
 }
 
+.div-reg-three
+{
+	margin: 0 auto;
+	width: 260px;
+	display: flex;
+	grid-template-columns: 10% 80% 10%;
+}
+
+.blanco-azul
+{
+	position: relative;
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+}
+
+.circle-blanco
+{
+	position: relative;
+	z-index: 1;
+	border-radius: 30px;
+	background-color: white;
+	height: 40px;
+	width: 40px;
+}
+
+.circle-blanco:before
+{
+	content: '';
+	background-color: red;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	-webkit-background-clip: text;
+}
+
+.cuadro-azul
+{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 20px;
+	height: 20px;
+	background-color: #5562fc;
+}
+
+.btn-azul
+{
+	position: relative;
+	display: inline-block;
+	width: 180px;
+}
+
+.btn-continuar
+{
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	height: 40px;
+	cursor: pointer;
+	border: 0px;
+	background-color: #5562fc;
+	border-radius: 20px;
+	transition: .8s;
+}
+
+.cuadro-azul-grande
+{
+	position: absolute;
+	bottom: 0;
+	width: 180px;
+	height: 20px;
+	background-color: #5562fc;
+}
+
+
+.cuadro-azul-2
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	background-color: #5562fc;
+}
+
 .container-img
 {
 	overflow: hidden;
+    position: relative;
+    width: 100%;
 }
 
-.container-img img
+.container-flex-foto
 {
+    position: relative;
+    width: 100%;
+    height: 449px;
+    z-index: 0;
+}
+
+.container-flex-boton
+{
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    bottom: 0;
+}
+
+.container-img .container-flex-foto img
+{
+	width: 100%;
 	height: 100%;
+	object-position: center;
+	object-fit: cover;
 	transition: .5s;
 }
 
@@ -270,10 +391,19 @@ section
 
 .btn-color
 {
+	background-color: transparent;
+	border: 0;
+	cursor: pointer;
+	font-size: 16px;
 	padding: .6em 1em;
 	font-weight: bold;
 	color: white;
 	text-shadow: 2px 2px 2px #3F3F3F;
+}
+
+.btn-color:focus
+{
+	outline: none;
 }
 
 .btn-agregar
@@ -389,6 +519,11 @@ section
 	align-items: center;
 }
 
+.centrado
+{
+	margin: 0 auto
+}
+
 .centrar .btn-footer
 {
 	color: white;
@@ -474,6 +609,14 @@ article
 {
 	margin: 0 auto;
 	padding: 2em 0;
+	width: 90%;
+}
+
+.art-acerca
+{
+	margin: 0 auto;
+	padding: 2em 0;
+	padding-bottom: 0; 
 	width: 90%;
 }
 

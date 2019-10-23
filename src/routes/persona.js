@@ -11,7 +11,7 @@ var multipart = require('connect-multiparty');
 var md_upload= multipart({uploadDir:'./public'});
 
 api.post('/registro', PersonaController.saveUser);
-api.post('/login',PersonaController.login);
+api.post('/informacion',PersonaController.login);
 
 api.get('/inicio', function(req, res) {
     res.render('html/login');

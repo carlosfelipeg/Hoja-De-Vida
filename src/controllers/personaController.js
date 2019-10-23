@@ -30,7 +30,7 @@ async function enviarMail(email,nombre,apellido) {
         from: '<programacionwebufps@outlook.com>', // sender address
         to: email, // list of receivers
         subject: 'Bienvenido ✔ '+nombre+' '+apellido, // Subject line
-        html: '<b>Bienvenido a Tu Hoja de Vida online, para comenzar Inicia sesion</b>' // html body
+        html: '<b>Tu registro en www.hojadevidaonline.com se ha efectuado exitosamente, para comenzar Inicia sesion</b>' // html body
     });
 
     console.log('Message sent: %s', info.messageId);
@@ -41,7 +41,7 @@ async function enviarMail(email,nombre,apellido) {
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
-enviarMail().catch(console.error);
+enviarMail().catch();
 
 function saveUser(req, res) {
     var params = req.body;
@@ -96,6 +96,7 @@ function login(req, res) {
       
         var documento=params.documento;
         var password=params.password;
+        var fecha_nacimiento=params.fecha_nacimiento
     
         req.getConnection((err,conn)=>{
             var sql = 'SELECT * FROM persona WHERE documento = ?';

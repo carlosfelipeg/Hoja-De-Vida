@@ -15,26 +15,39 @@
 
 <div class="container-blue">
 	<div style="margin: 0 auto; width: auto; text-align: center; margin-bottom: 1.5em">
+		<!--
 		<a class="btn-color btn-color-b" href="">Hombre</a>
-		<a class="btn-color btn-color-r" href="">Mujer</a>	
-		<a class="btn-color btn-color-o" href="">Otro</a>	
+		<a class="btn-color btn-color-r" href="">Mujer</a>
+		<a class="btn-color btn-color-o" href="">Otro</a> 
+		-->
+		<button id="" class="btn-color btn-color-b">Hombre</button>
+		<button id="" class="btn-color btn-color-r">Mujer</button>
+		<button id="" class="btn-color btn-color-o">Otro</button>
 	</div>
 	<div class="container-shadow">
 		<section class="flex">
 			<div class="container-img">
-				<img src="../imagen/perfil.jpg">
+				<div class="container-flex-foto">
+					<img src="../imagen/perfil.jpg">
+				</div>
+				<div class="container-flex-boton">
+					<div class="div-reg-three">
+						<div class="blanco-azul">
+							
+						</div>
+						<div class="btn-azul">
+							<button type="submit" formmethod="post" id="btn-ing" class="btn-continuar">EDITAR</button>
+							<div class="cuadro-azul-grande"></div>
+						</div>
+						<div class="blanco-azul">
+							
+						</div>
+					</div>
+				</div>
+
 			</div>
 			<div class="container-info-personal">
 				<form>
-				<!--
-					<div class="user">
-						<div class="container-user">
-							<input style="font-size: 25px;" class="size-name" id="txtName" type="text" placeholder="Jazmin Fernanda" name="">
-							<input id="txtName2" class="size-name" type="text" placeholder="Sanabria Novoa" name="">
-						</div>
-					</div>
-				-->
-				
 					<div class="ilblck">
 						<p>Nombres</p>
 						<input type="text" name="" readonly value="<%=user.nombre%>">
@@ -49,18 +62,6 @@
 						min="1969-01-01" max="2011-10-8">
 					</div>
 					<div class="ilblck">
-						<p>Estado civil</p>
-						<select>
-						  <option value="Soltera">Solterx</option>
-						  <option value="Casada">Casadx</option>
-						  <option value="Comprometido">Comprometidx</option>
-						  <option value="UnionLibre">Unión libre</option>
-						  <option value="Separado">Separadx</option>
-						  <option value="Divorciado">Divorciadx</option>
-						  <option value="Viudo">Viudx</option>
-						</select>
-					</div>
-					<div class="ilblck">
 						<p>Dirección</p>
 						<input type="text" name="">
 					</div>
@@ -72,13 +73,42 @@
 						<p>Email</p>
 						<input type="text" name=""readonly value="<%=user.email%>">
 					</div>
+					<div class="ilblck-btn">
+						<p>Estado civil</p>
+						<select>
+						  <option value="Soltera">Solterx</option>
+						  <option value="Casada">Casadx</option>
+						  <option value="Comprometido">Comprometidx</option>
+						  <option value="UnionLibre">Unión libre</option>
+						  <option value="Separado">Separadx</option>
+						  <option value="Divorciado">Divorciadx</option>
+						  <option value="Viudo">Viudx</option>
+						</select>
+						<div>
+							<a class="btn-ico verde centrado" href="#">
+								<span class="icon-checkmark"></span>
+							</a>
+						</div>
+					</div>
 				</form>
 			</div>
 		</section>
 		<section id="line-color" class="line-top">
-			<article>
+			<article class="art-acerca">
 				<h1 id="h1ID" class="h1-b">Acerca de mi</h1>
 				<textarea name="" class="dp" cols="47" rows="7" placeholder="Descripción"></textarea>
+				<div class="div-reg-three">
+					<div class="blanco-azul">
+							
+					</div>
+					<div class="btn-azul">
+						<button type="submit" formmethod="post" id="btn-ing" class="btn-continuar">GUARDAR</button>
+						<div class="cuadro-azul-grande"></div>
+					</div>
+					<div class="blanco-azul">
+						
+					</div>
+				</div>
 			</article>
 		</section>
 		<section class="gray" id="contenedor-clon">
@@ -116,9 +146,6 @@
 					<div class="grid-btn">
 						<a class="btn-ico verde" href="#">
 							<span class="icon-checkmark"></span>
-						</a>
-						<a class="btn-ico rojo" href="#">
-							<span class="icon-cross"></span>
 						</a>
 					</div>
 				</div>
@@ -164,9 +191,6 @@
 						<div class="grid-btn">
 							<a class="btn-ico verde" href="#">
 								<span class="icon-checkmark"></span>
-							</a>
-							<a class="btn-ico rojo" href="#">
-								<span class="icon-cross"></span>
 							</a>
 							<button class="btn-ico azul cir" id="add-clon">
 								<span class="icon-plus"></span>
@@ -217,9 +241,6 @@
 							<a class="btn-ico verde" href="#">
 								<span class="icon-checkmark"></span>
 							</a>
-							<a class="btn-ico rojo" href="#">
-								<span class="icon-cross"></span>
-							</a>
 							<button class="btn-ico azul cir" id="add-clon">
 								<span class="icon-plus"></span>
 							</button>
@@ -265,9 +286,6 @@
 					<div class="grid-btn">
 						<a class="btn-ico verde" href="#">
 							<span class="icon-checkmark"></span>
-						</a>
-						<a class="btn-ico rojo" href="#">
-							<span class="icon-cross"></span>
 						</a>
 						<button class="btn-ico azul cir" id="add-clon-dos">
 							<span class="icon-plus"></span>
@@ -316,9 +334,6 @@
 							<a class="btn-ico verde" href="#">
 								<span class="icon-checkmark"></span>
 							</a>
-							<a class="btn-ico rojo" href="#">
-								<span class="icon-cross"></span>
-							</a>
 							<button class="btn-ico azul cir" id="add-clon-dos">
 								<span class="icon-plus"></span>
 							</button>
@@ -333,10 +348,7 @@
 						<p>Nombre completo</p>
 						<input type="" name="">
 					</div>
-					<div class="ilblck">
-						<p>Tipo de documento</p>
-						<input type="" name="">
-					</div>
+
 					<div class="ilblck">
 						<p>Numero de documento</p>
 						<input type="" name="">
@@ -357,8 +369,40 @@
 						<a class="btn-ico verde" href="#">
 							<span class="icon-checkmark"></span>
 						</a>
-						<a class="btn-ico rojo" href="#">
-							<span class="icon-cross"></span>
+						<button class="btn-ico azul cir" id="add-clon-4">
+							<span class="icon-plus"></span>
+						</button>
+					</div>
+				</div>
+			</article>
+
+			<template  id="clon-dos">
+				<article class="mo" id="tab4">
+					<div class="submo">
+					<div class="ilblck">
+						<p>Nombre completo</p>
+						<input type="" name="">
+					</div>
+
+					<div class="ilblck">
+						<p>Numero de documento</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Ocupación</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Teléfono</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Descripción</p>
+						<input type="" name="">
+					</div>
+					<div class="grid-btn">
+						<a class="btn-ico verde" href="#">
+							<span class="icon-checkmark"></span>
 						</a>
 						<button class="btn-ico azul cir" id="add-clon-4">
 							<span class="icon-plus"></span>
@@ -366,6 +410,7 @@
 					</div>
 				</div>
 			</article>
+			</template>
 		</section>
 		<footer>
 				<div class="container-circle">

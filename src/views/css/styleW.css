@@ -23,7 +23,7 @@ a:focus, button:focus
 a{ text-decoration: none; }
 
 body{
-	background-color: #5562fc;
+	background: linear-gradient(90deg, #4eeaf9, #5562fc, #ca1bfc);
 }
 
 .contenedor-welcome
@@ -92,6 +92,33 @@ body{
 	font-size: 18px;
 	padding: .6em 0;
 	width: 100%;
+}
+
+.container-fecha-reg
+{
+	align-items: center;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	padding: .5em 0;
+}
+
+.txt-fecha-nac
+{
+	color: #888888;
+	font-size: 18px;
+	text-align: left;
+}
+
+.datenac:focus
+{
+	outline: none;
+}
+
+.datenac
+{
+	border: 0;
+	border-bottom: 2px solid #999999;
+	font-size: 18px;
 }
 
 .btn-azul
@@ -287,6 +314,8 @@ body{
 	height: 40px;
 	width: 40px;
 }
+
+
 
 .cuadro-azul
 {
