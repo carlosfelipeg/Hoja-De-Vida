@@ -4,6 +4,7 @@ var contador3=0;
 var flag1=false;
 var flag2=false;
 var flag3=false;
+
 $(function() {
 		$('#div-Color').addClass('bluee');
 

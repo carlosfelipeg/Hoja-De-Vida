@@ -20,24 +20,22 @@ async function enviarMail(email, nombre, apellido) {
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        host: "smtp-mail.outlook.com", // hostname
-        secureConnection: false, // TLS requires secureConnection to be false
-        port: 587, // port for secure SMTP
-        tls: {
-            ciphers: 'SSLv3'
-        },
+        service: "Gmail",
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
-            user: 'programacionwebufps@outlook.com',
-            pass: 'Fcbarcelona12345!'
+            user: "hojadevidaonlineufps@gmail.com",
+            pass: "Fcbarcelona12345!"
         }
     });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: '<programacionwebufps@outlook.com>', // sender address
+        from: '<hojadevidaonlineufps@gmail.com>', // sender address
         to: email, // list of receivers
         subject: 'Bienvenido ✔ ' + nombre + ' ' + apellido, // Subject line
-        html: '<b>Tu registro en www.hojadevidaonline.com se ha efectuado exitosamente, para comenzar Inicia sesion</b>' // html body
+        html: '<b>Bienvenido a Tu Hoja de Vida online, para comenzar Inicia sesion</b>' // html body
     });
 
     console.log('Message sent: %s', info.messageId);
@@ -48,7 +46,7 @@ async function enviarMail(email, nombre, apellido) {
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
-enviarMail().catch();
+enviarMail().catch(console.error);
 function subirFoto(req, res) {
     if (req.files) {
         var file_name = req.files.file.name;
@@ -173,7 +171,6 @@ function login(req, res) {
                     if (params.gettoken) {//Cambiar
                         //generar y devolver token
                         return res.status(200).render('html/index', {
-                            token: jwt.createToken(user),
                             user: user[0],
                         });
                     } else {
