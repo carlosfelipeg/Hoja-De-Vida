@@ -26,6 +26,7 @@ api.get('/inicio', function(req, res) {
 api.get('/',function(req, res) {
     res.render('html/registro');
 });
+api.get('/pdf',PersonaController.generarPdf);
 
 
 module.exports=api;

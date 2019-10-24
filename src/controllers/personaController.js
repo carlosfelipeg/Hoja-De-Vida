@@ -1,12 +1,19 @@
 'use strict'
+
 var bcrypt = require('bcryptjs');
 var fs = require('fs');
+
+//var pdf = require('html-pdf')
+
+var ejs = require('ejs');
+var wkhtmltopdf = require('wkhtmltopdf');
+
 var path = require('path');
-var jwt=require('../../services/jwt');
+var jwt = require('../../services/jwt');
 const nodemailer = require('nodemailer');
 
 // async..await is not allowed in global scope, must use a wrapper
-async function enviarMail(email,nombre,apellido) {
+async function enviarMail(email, nombre, apellido) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -17,19 +24,19 @@ async function enviarMail(email,nombre,apellido) {
         secureConnection: false, // TLS requires secureConnection to be false
         port: 587, // port for secure SMTP
         tls: {
-           ciphers:'SSLv3'
+            ciphers: 'SSLv3'
         },
         auth: {
-          user: 'programacionwebufps@outlook.com',
-          pass: 'Fcbarcelona12345!'
+            user: 'programacionwebufps@outlook.com',
+            pass: 'Fcbarcelona12345!'
         }
-      });
+    });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: '<programacionwebufps@outlook.com>', // sender address
         to: email, // list of receivers
-        subject: 'Bienvenido ✔ '+nombre+' '+apellido, // Subject line
+        subject: 'Bienvenido ✔ ' + nombre + ' ' + apellido, // Subject line
         html: '<b>Tu registro en www.hojadevidaonline.com se ha efectuado exitosamente, para comenzar Inicia sesion</b>' // html body
     });
 
@@ -42,121 +49,150 @@ async function enviarMail(email,nombre,apellido) {
 }
 
 enviarMail().catch();
-function subirFoto(req, res){
-    if(req.files){
-        var file_name= req.files.file.name;
-        console.log('hola '+file_name);
+function subirFoto(req, res) {
+    if (req.files) {
+        var file_name = req.files.file.name;
+        console.log('hola ' + file_name);
         console.log(req.body);
-        var ext_split=file_name.split('\.');
+        var ext_split = file_name.split('\.');
         console.log(ext_split);
-        var file_ext  = ext_split[1];
+        var file_ext = ext_split[1];
         console.log(file_ext);
 
 
-        if(file_ext=='png'|| file_ext=='jpg'|| file_ext=='jpeg'|| file_ext=='gif'){
-           let EDFile = req.files.file;
-            EDFile.mv(`./src/public/files/${EDFile.name}`,err => {
-                if(err) return res.status(500).send({ message : err })
-                 //GUARDO EN LA  BD LA REFERENCIA
-                return res.status(200).send({ message : 'File upload' })
+        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'gif') {
+            let EDFile = req.files.file;
+            EDFile.mv(`./src/public/files/${EDFile.name}`, err => {
+                if (err) return res.status(500).send({ message: err })
+                //GUARDO EN LA  BD LA REFERENCIA
+                return res.status(200).send({ message: 'File upload' })
             });
-            }else{
-               return removeFiles(res, file_path, 'Extension no valida');
+        } else {
+            return removeFiles(res, file_path, 'Extension no valida');
         }
-    }else{
-        return res.status(200).send({message: 'No se ha subido una imagen'});
+    } else {
+        return res.status(200).send({ message: 'No se ha subido una imagen' });
     }
 }
 
 function saveUser(req, res) {
     var params = req.body;
-   //  console.log(params);
+    //  console.log(params);
     //creo el usuario que voy a guardar
     var user = new Object();
-    if (params.documento && params.nombre && params.apellido&& params.email && params.password ) {
+    if (params.documento && params.nombre && params.apellido && params.email && params.password) {
 
         user.documento = params.documento;
         user.nombre = params.nombre;
         user.apellido = params.apellido;
         user.email = params.email;
         //valido en mi BD que no exista un registro con el mismo email
-        req.getConnection((err,conn)=>{
-        var sql = 'SELECT * FROM persona WHERE email = ?';
-            conn.query(sql,[String(user.email)],(err, user)=>{
-                if(user.length>=1){
-                    return  res.status(200).render('html/registro',{
-                        message:'Email ya existe, intenta ingresando otro E-mail',
+        req.getConnection((err, conn) => {
+            var sql = 'SELECT * FROM persona WHERE email = ?';
+            conn.query(sql, [String(user.email)], (err, user) => {
+                if (user.length >= 1) {
+                    return res.status(200).render('html/registro', {
+                        message: 'Email ya existe, intenta ingresando otro E-mail',
                     });
                 }
             });
         });
         //Crifro la password  
-        bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(String(params.password), salt, function(err, hash) {
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(String(params.password), salt, function (err, hash) {
                 user.password = hash;
                 req.getConnection((err, conn) => {
                     conn.query('INSERT INTO persona set ?', [user], (err, persona) => {
-                        if(!persona){
-                            return res.status(200).render('html/registro',{
-                                message:'Documento ya existe'
-                            });  
+                        if (!persona) {
+                            return res.status(200).render('html/registro', {
+                                message: 'Documento ya existe'
+                            });
                         }
-                        enviarMail(user.email,user.nombre, user.apellido);
-                         return res.status(200).render('html/login',{
-                            message:'Registrado Correctamente'
+                        enviarMail(user.email, user.nombre, user.apellido);
+                        return res.status(200).render('html/login', {
+                            message: 'Registrado Correctamente'
                         });
                     });
                 });
             });
         });
-    }else{
-        return res.status(200).render('html/registro',{
-            message:'Debes completar todos los campos'
-        }); 
+    } else {
+        return res.status(200).render('html/registro', {
+            message: 'Debes completar todos los campos'
+        });
     }
 }
 
+
+function generarPdf(req, res) {
+
+    try {
+        console.log('hola');
+        var base = path.resolve('.');
+        var file = base + '/src/pdf/pdf.ejs';
+
+        var template = fs.readFileSync(file, 'utf-8');
+        var html = ejs.render(template, {});
+        console.log(html);
+
+    } catch (e) {
+        console.log(e)  // If any error is thrown, you can see the message.
+    }
+
+    wkhtmltopdf(html).pipe(res);
+    /*
+    var options = {
+        filename: './hojadevida.pdf', format: 'A4', orientation: 'portrait', directory: './phantomScripts/', type: "pdf"
+    };
+    pdf.create(html, options).toFile(function (err, res) {
+        if (err) return console.log(err);
+        console.log(res);
+    });
+    */
+}
+
 function login(req, res) {
-        var params=req.body;
-      
-        var documento=params.documento;
-        var password=params.password;
-        var fecha_nacimiento=params.fecha_nacimiento
-    
-        req.getConnection((err,conn)=>{
-            var sql = 'SELECT * FROM persona WHERE documento = ?';
-            conn.query(sql,[String(documento)],(err, user)=>{
-                if(user.length==0){
-                    return  res.status(200).render('html/login',{
-                        message:'Documento No Registrado'
-                    });
-                }
-                bcrypt.compare(password, user[0].password, (err, check)=>{//comparo la del POST con la encriptada
-                    if(check){
-                         user[0].password=undefined;//elimino la contraseña de los datos que retorno
-                         //devolver datos de usuario
-                         if(params.gettoken){//Cambiar
-                             //generar y devolver token
-                             return  res.status(200).render('html/index',{
-                                token: jwt.createToken(user),
-                                user:user[0],
-                            });
-                         }else{
-                            return  res.status(200).render('html/index',{
-                                user:user[0]
-                            });
-                         }
-                    }else{
-                        return  res.status(200).render('html/login',{
-                            message:'Documento o Contraseña Incorrecta',
+    var params = req.body;
+
+    var documento = params.documento;
+    var password = params.password;
+    var fecha_nacimiento = params.fecha_nacimiento
+
+    req.getConnection((err, conn) => {
+        var sql = 'SELECT * FROM persona WHERE documento = ?';
+        conn.query(sql, [String(documento)], (err, user) => {
+            if (user.length == 0) {
+                return res.status(200).render('html/login', {
+                    message: 'Documento No Registrado'
+                });
+            }
+            bcrypt.compare(password, user[0].password, (err, check) => {//comparo la del POST con la encriptada
+                if (check) {
+                    user[0].password = undefined;//elimino la contraseña de los datos que retorno
+                    //devolver datos de usuario
+                    if (params.gettoken) {//Cambiar
+                        //generar y devolver token
+                        return res.status(200).render('html/index', {
+                            token: jwt.createToken(user),
+                            user: user[0],
+                        });
+                    } else {
+                        return res.status(200).render('html/index', {
+                            user: user[0]
                         });
                     }
-                  });
+                } else {
+                    return res.status(200).render('html/login', {
+                        message: 'Documento o Contraseña Incorrecta',
+                    });
+                }
             });
         });
+    });
 }
 module.exports = {
     saveUser,
     login,
-    subirFoto
+    subirFoto,
+    generarPdf
 }

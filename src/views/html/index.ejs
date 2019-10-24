@@ -1,426 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<link rel="stylesheet" type="text/css" href="../iconos/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<meta charset="utf-8">
 	<title>Hoja de Vida</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://code.jquery.com/jquery-3.4.1.js"
-		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	<script  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 	<script src="../js/main.js"></script>
 </head>
-
 <body>
 
-	<div class="container-blue">
-		<div style="margin: 0 auto; width: auto; text-align: center; margin-bottom: 1.5em">
-			<!--
+<div class="container-blue">
+	<div style="margin: 0 auto; width: auto; text-align: center; margin-bottom: 1.5em">
+		<!--
 		<a class="btn-color btn-color-b" href="">Hombre</a>
 		<a class="btn-color btn-color-r" href="">Mujer</a>
 		<a class="btn-color btn-color-o" href="">Otro</a> 
 		-->
-			<button id="" class="btn-color btn-color-b">Hombre</button>
-			<button id="" class="btn-color btn-color-r">Mujer</button>
-			<button id="" class="btn-color btn-color-o">Otro</button>
-		</div>
-
-		<div class="container-shadow">
-			<section class="flex">
-				<div class="container-img">
-					<div class="container-flex-foto">
-						<img src="../imagen/perfil.jpg">
-					</div>
-					<div class="container-flex-boton">
-						<div class="div-reg-three">
-							<div class="blanco-azul">
-
-							</div>
-							<div class="btn-azul">
-								<form action="./subir_foto" method="POST" enctype="multipart/form-data">
-									<input name="file" type="file" />
-									<input class="btn-continuar" type="submit" value="Subir archivo" />
-								</form>
-								<div class="cuadro-azul-grande"></div>
-							</div>
-							<div class="blanco-azul">
-
-							</div>
-						</div>
-					</div>
+		<button id="" class="btn-color btn-color-b">Hombre</button>
+		<button id="" class="btn-color btn-color-r">Mujer</button>
+		<!-- <button id="" class="btn-color btn-color-o">Otro</button> -->
+	</div>
+	<div class="container-shadow">
+		<section class="flex">
+			<div class="container-img">
+				<div class="container-flex-foto">
+					<img src="../imagen/perfil.jpg">
 				</div>
-
-				<div class="container-info-personal">
-					<form>
-						<div class="ilblck">
-							<p>Nombres</p>
-							<input type="text" name="" readonly value="<%=user.nombre%>">
-						</div>
-						<div class="ilblck">
-							<p>Apellidos</p>
-							<input type="text" name="" readonly value="<%=user.apellido%>">
-						</div>
-						<div class="ilblck">
-							<p>Fecha Nacimiento</p>
-							<input type="date" id="start" name="trip-start" value="2019-10-8" min="1969-01-01"
-								max="2011-10-8">
-						</div>
-						<div class="ilblck">
-							<p>Dirección</p>
-							<input type="text" name="">
-						</div>
-						<div class="ilblck">
-							<p>Teléfono</p>
-							<input type="text" name="">
-						</div>
-						<div class="ilblck">
-							<p>Email</p>
-							<input type="text" name="" readonly value="<%=user.email%>">
-						</div>
-						<div class="ilblck-btn">
-							<p>Estado civil</p>
-							<select>
-								<option value="Soltera">Solterx</option>
-								<option value="Casada">Casadx</option>
-								<option value="Comprometido">Comprometidx</option>
-								<option value="UnionLibre">Unión libre</option>
-								<option value="Separado">Separadx</option>
-								<option value="Divorciado">Divorciadx</option>
-								<option value="Viudo">Viudx</option>
-							</select>
-							<div class="contenedor-boton-guardar-info-personal">
-								<a class="btn-ico verde centrado" href="#">
-									<span class="icon-checkmark"></span>
-								</a>
-							</div>
-						</div>
-					</form>
-				</div>
-			</section>
-			<section id="line-color" class="line-top">
-				<article class="art-acerca">
-					<h1 id="h1ID" class="h1-b">Acerca de mi</h1>
-					<textarea name="" class="dp" cols="47" rows="7" placeholder="Descripción"></textarea>
+				<div class="container-flex-boton">
 					<div class="div-reg-three">
 						<div class="blanco-azul">
-
+							
 						</div>
 						<div class="btn-azul">
-							<button type="submit" formmethod="post" id="btn-ing" class="btn-continuar">GUARDAR</button>
+							<button type="submit" formmethod="post" id="btn-ing" class="btn-continuar">EDITAR</button>
 							<div class="cuadro-azul-grande"></div>
 						</div>
 						<div class="blanco-azul">
-
+							
 						</div>
 					</div>
-				</article>
-			</section>
-			<section class="gray" id="contenedor-clon">
-				<div class="btn-menu">
-					<li>
-						<a class="styleAbtn" href="#tab1">Educación Basica</a>
-					</li>
-					<li>
-						<a class="styleAbtn" href="#tab2">Educación Superior</a>
-					</li>
-					<li>
-						<a class="styleAbtn" href="#tab3">Experiencia Laboral</a>
-					</li>
-					<li>
-						<a class="styleAbtn" href="#tab4">Recomendación personal</a>
-					</li>
 				</div>
 
+			</div>
+			<div class="container-info-personal">
+				<form>
+					<div class="ilblck">
+						<p>Nombres</p>
+						<input type="text" name="" readonly value="<%=user.nombre%>">
+					</div>
+					<div class="ilblck">
+						<p>Apellidos</p>
+						<input type="text" name=""readonly value="<%=user.apellido%>">
+					</div>
+					<div class="ilblck">	
+						<p>Fecha Nacimiento</p>
+						<input type="date" id="start" name="trip-start" value="2019-10-8"
+						min="1969-01-01" max="2011-10-8">
+					</div>
+					<div class="ilblck">
+						<p>Dirección</p>
+						<input type="text" name="">
+					</div>
+					<div class="ilblck">
+						<p>Teléfono</p>
+						<input type="text" name="">
+					</div>
+					<div class="ilblck">
+						<p>Email</p>
+						<input type="text" name=""readonly value="<%=user.email%>">
+					</div>
+					<div class="ilblck-btn">
+						<p>Estado civil</p>
+						<select>
+						  <option value="Soltera">Solterx</option>
+						  <option value="Casada">Casadx</option>
+						  <option value="Comprometido">Comprometidx</option>
+						  <option value="UnionLibre">Unión libre</option>
+						  <option value="Separado">Separadx</option>
+						  <option value="Divorciado">Divorciadx</option>
+						  <option value="Viudo">Viudx</option>
+						</select>
+					</div>
+				</form>
+			</div>
+		</section>
+		<section id="line-color" class="line-top">
+			<article class="art-acerca">
+				<h1 id="h1ID" class="h1-b">Acerca de mi</h1>
+				<textarea name="" class="dp" cols="47" rows="7" placeholder="Descripción"></textarea>
+			
+			</article>
+		</section>
+		<section class="gray" id="contenedor-clon">
+			<div class="btn-menu">
+				<li>
+					<a id="opcion1" class="styleAbtn" href="#tab1">Educación Basica</a>
+				</li>
+				<li>
+					<a id="opcion2" class="styleAbtn" href="#tab2">Educación Superior</a>
+				</li>
+				<li>
+					<a id="opcion3" class="styleAbtn" href="#tab3">Experiencia Laboral</a>
+				</li>
+				<li>
+					<a id="opcion4" class="styleAbtn" href="#tab4">Recomendación personal</a>
+				</li>
+			</div>
+			
+			
 
+			<article class="mo" id="tab1">
+				<div class="submo">
+					<div class="ilblck">
+						<p>Titulo obtenido:</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Fecha de grado:</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Nombre de institución academica:</p>
+						<input type=""  name="">
+					</div>
+				</div>
+			</article>
 
-				<article class="mo" id="tab1">
+			<article class="mo" id="tab2">
+				<button class="btn-ico azul cir flexright" id="add-clon">
+					<span class="icon-plus"></span>
+				</button>
+
+				<div class="sub-mo">
+					<div class="submo">
+						<div class="ilblck middle">
+							<div class="ilblck-middle">
+								<p>Modalidad academica:</p>
+								<select class="middle-select">
+								  <option value="tc">TC (Técnica)</option>
+								  <option value="es">ES (Especialización)</option>
+								  <option value="tl">TL (Tecnológica)</option>
+								  <option value="mg">MG (Maestría o Magister)</option>
+								  <option value="te">TE (Tecnológica especializaada)</option>
+								  <option value="doc">DOC (Doctorado o PHD)</option>
+								  <option value="un">UN (Universitaria)</option>
+								</select>
+							</div>
+							<div></div>
+							<div class="ilblck-middle inputDerecha">
+								<p>Graduado:</p>
+								<select class="select-mini">
+								  <option value="si">SI</option>
+								  <option value="no">NO</option>
+								</select>
+							</div>
+						</div>
+						<div class="ilblck">
+							<p>Nombre estudios:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Fecha finalización:</p>
+							<input type="date" id="start" name="trip-start" value="2019-10-8"
+								min="1969-01-01" max="2011-10-8">
+						</div>
+						<div class="ilblck">
+							<p>No. de Tarjeta Profesinal:</p>
+							<input type=""  name="">
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<template id="clon">
+				<article class="mo fondoBlanco" id="tab2">
+					<div class="submo">
+						<div class="ilblck middle">
+							<div class="ilblck-middle">
+								<p>Modalidad academica:</p>
+								<select class="middle-select">
+								  <option value="tc">TC (Técnica)</option>
+								  <option value="es">ES (Especialización)</option>
+								  <option value="tl">TL (Tecnológica)</option>
+								  <option value="mg">MG (Maestría o Magister)</option>
+								  <option value="te">TE (Tecnológica especializaada)</option>
+								  <option value="doc">DOC (Doctorado o PHD)</option>
+								  <option value="un">UN (Universitaria)</option>
+								</select>
+							</div>
+							<div></div>
+							<div class="ilblck-middle inputDerecha">
+								<p>Graduado:</p>
+								<select class="select-mini">
+								  <option value="si">SI</option>
+								  <option value="no">NO</option>
+								</select>
+							</div>
+						</div>
+						<div class="ilblck">
+							<p>Nombre estudios:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Fecha finalización:</p>
+							<input type="date" id="start" name="trip-start" value="2019-10-8"
+								min="1969-01-01" max="2011-10-8">
+						</div>
+						<div class="ilblck">
+							<p>No. de Tarjeta Profesinal:</p>
+							<input type=""  name="">
+						</div>
+					</div>
+				</article>
+			</template>
+
+			<article class="mo" id="tab3">
+				<button class="btn-ico azul cir flexright" id="add-clon-dos">
+					<span class="icon-plus"></span>
+				</button>
+
+				<div class="sub-mo">
 					<div class="submo">
 						<div class="ilblck">
-							<p>Titulo obtenido:</p>
+							<p>Empresa:</p>
 							<input type="" name="">
 						</div>
 						<div class="ilblck">
-							<p>Fecha de grado:</p>
+							<p>Teléfono:</p>
 							<input type="" name="">
 						</div>
 						<div class="ilblck">
-							<p>Nombre de institución academica:</p>
+							<p>Cargo:</p>
 							<input type="" name="">
 						</div>
-						<div class="grid-btn">
-							<a class="btn-ico verde" href="#">
-								<span class="icon-checkmark"></span>
-							</a>
+						<div class="ilblck">
+							<p>Correo electronico:</p>
+							<input type="" name="">
 						</div>
-					</div>
-				</article>
-
-				<article class="mo" id="tab2">
-					<button class="btn-ico azul cir flexright" id="add-clon">
-						<span class="icon-plus"></span>
-					</button>
-
-					<div class="sub-mo">
-						<div class="submo">
-							<div class="ilblck middle">
-								<div class="ilblck-middle">
-									<p>Modalidad academica:</p>
-									<select class="middle-select">
-										<option value="tc">TC (Técnica)</option>
-										<option value="es">ES (Especialización)</option>
-										<option value="tl">TL (Tecnológica)</option>
-										<option value="mg">MG (Maestría o Magister)</option>
-										<option value="te">TE (Tecnológica especializaada)</option>
-										<option value="doc">DOC (Doctorado o PHD)</option>
-										<option value="un">UN (Universitaria)</option>
-									</select>
-								</div>
-								<div></div>
-								<div class="ilblck-middle inputDerecha">
-									<p>Graduado:</p>
-									<select class="select-mini">
-										<option value="si">SI</option>
-										<option value="no">NO</option>
-									</select>
-								</div>
+						<div class="ilblck">
+							<p>Dirección:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<div class="ilblck-middle">
+								<p>Fecha ingreso:</p>
+								<input type="date" id="start" name="trip-start" value="2019-10-8"
+								min="1969-01-01" max="2011-10-8">
 							</div>
-							<div class="ilblck">
-								<p>Nombre estudios:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Fecha finalización:</p>
-								<input type="date" id="start" name="trip-start" value="2019-10-8" min="1969-01-01"
-									max="2011-10-8">
-							</div>
-							<div class="ilblck">
-								<p>No. de Tarjeta Profesinal:</p>
-								<input type="" name="">
-							</div>
-							<div class="grid-btn">
-								<a class="btn-ico verde" href="#">
-									<span class="icon-checkmark"></span>
-								</a>
+							<div class="ilblck-middle inputDerecha">
+								<p>Fecha retiro:</p>
+								<input type="date" id="start" name="trip-start" value="2019-10-8"
+									min="1969-01-01" max="2011-10-8">
 							</div>
 						</div>
 					</div>
-				</article>
-
-				<template id="clon">
-					<form action="">
-
-						<article class="mo fondoBlanco" id="tab2">
-							<div class="submo">
-								<div class="ilblck middle">
-									<div class="ilblck-middle">
-										<p>Modalidad academica:</p>
-										<select class="middle-select">
-											<option value="tc">TC (Técnica)</option>
-											<option value="es">ES (Especialización)</option>
-											<option value="tl">TL (Tecnológica)</option>
-											<option value="mg">MG (Maestría o Magister)</option>
-											<option value="te">TE (Tecnológica especializaada)</option>
-											<option value="doc">DOC (Doctorado o PHD)</option>
-											<option value="un">UN (Universitaria)</option>
-										</select>
-									</div>
-									<div></div>
-									<div class="ilblck-middle inputDerecha">
-										<p>Graduado:</p>
-										<select class="select-mini">
-											<option value="si">SI</option>
-											<option value="no">NO</option>
-										</select>
-									</div>
-								</div>
-								<div class="ilblck">
-									<p>Nombre estudios:</p>
-									<input type="" name="">
-								</div>
-								<div class="ilblck">
-									<p>Fecha finalización:</p>
-									<input type="date" id="start" name="trip-start" value="2019-10-8" min="1969-01-01"
-										max="2011-10-8">
-								</div>
-								<div class="ilblck">
-									<p>No. de Tarjeta Profesinal:</p>
-									<input type="" name="">
-								</div>
-								<div class="grid-btn">
-									<a class="btn-ico verde" href="#">
-										<span class="icon-checkmark"></span>
-									</a>
-								</div>
+				</div>
+			</article>
+			
+			<template id="clon-dos">
+				<article class="mo fondoBlanco" id="tab3">
+					<div class="submo">
+						<div class="ilblck">
+							<p>Empresa:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Teléfono:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Cargo:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Correo electronico:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Dirección:</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<div class="ilblck-middle">
+								<p>Fecha ingreso:</p>
+								<input type="date" id="start" name="trip-start" value="2019-10-8"
+								min="1969-01-01" max="2011-10-8">
 							</div>
-						</article>
-
-					</form>
-				</template>
-
-				<article class="mo" id="tab3">
-					<button class="btn-ico azul cir flexright" id="add-clon-dos">
-						<span class="icon-plus"></span>
-					</button>
-
-					<div class="sub-mo">
-						<div class="submo">
-							<div class="ilblck">
-								<p>Empresa:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Teléfono:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Cargo:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Correo electronico:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Dirección:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<div class="ilblck-middle">
-									<p>Fecha ingreso:</p>
-									<input type="date" id="start" name="trip-start" value="2019-10-8" min="1969-01-01"
-										max="2011-10-8">
-								</div>
-								<div class="ilblck-middle inputDerecha">
-									<p>Fecha retiro:</p>
-									<input type="date" id="start" name="trip-start" value="2019-10-8" min="1969-01-01"
-										max="2011-10-8">
-								</div>
-							</div>
-							<div class="grid-btn">
-								<a class="btn-ico verde" href="#">
-									<span class="icon-checkmark"></span>
-								</a>
+							<div class="ilblck-middle inputDerecha">
+								<p>Fecha retiro:</p>
+								<input type="date" id="start" name="trip-start" value="2019-10-8"
+									min="1969-01-01" max="2011-10-8">
 							</div>
 						</div>
 					</div>
 				</article>
+			</template>
 
-				<template id="clon-dos">
-					<article class="mo fondoBlanco" id="tab3">
-						<div class="submo">
-							<div class="ilblck">
-								<p>Empresa:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Teléfono:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Cargo:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Correo electronico:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Dirección:</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<div class="ilblck-middle">
-									<p>Fecha ingreso:</p>
-									<input type="date" id="start" name="trip-start" value="2019-10-8" min="1969-01-01"
-										max="2011-10-8">
-								</div>
-								<div class="ilblck-middle inputDerecha">
-									<p>Fecha retiro:</p>
-									<input type="date" id="start" name="trip-start" value="2019-10-8" min="1969-01-01"
-										max="2011-10-8">
-								</div>
-							</div>
-							<div class="grid-btn">
-								<a class="btn-ico verde" href="#">
-									<span class="icon-checkmark"></span>
-								</a>
-							</div>
+			<article class="mo fondoBlanco" id="tab4">
+				<button class="btn-ico azul cir flexright" id="add-clon-4">
+					<span class="icon-plus"></span>
+				</button>
+
+				<div class="sub-mo">
+					<div class="submo">
+						<div class="ilblck">
+							<p>Nombre completo</p>
+							<input type="" name="">
 						</div>
-					</article>
-				</template>
 
-				<article class="mo" id="tab4">
-					<button class="btn-ico azul cir flexright" id="add-clon-4">
-						<span class="icon-plus"></span>
-					</button>
-
-					<div class="sub-mo">
-						<div class="submo">
-							<div class="ilblck">
-								<p>Nombre completo</p>
-								<input type="" name="">
-							</div>
-
-							<div class="ilblck">
-								<p>Numero de documento</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Ocupación</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Teléfono</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Descripción</p>
-								<input type="" name="">
-							</div>
-							<div class="grid-btn">
-								<a class="btn-ico verde" href="#">
-									<span class="icon-checkmark"></span>
-								</a>
-							</div>
+						<div class="ilblck">
+							<p>Numero de documento</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Ocupación</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Teléfono</p>
+							<input type="" name="">
+						</div>
+						<div class="ilblck">
+							<p>Descripción</p>
+							<input type="" name="">
 						</div>
 					</div>
-				</article>
+				</div>
+			</article>
 
-				<template id="clon-tres">
-					<article class="mo fondoBlanco" id="tab4">
-						<div class="submo">
-							<div class="ilblck">
-								<p>Nombre completo</p>
-								<input type="" name="">
-							</div>
+			<template  id="clon-tres">
+				<article class="mo fondoBlanco" id="tab4">
+					<div class="submo">
+					<div class="ilblck">
+						<p>Nombre completo</p>
+						<input type="" name="">
+					</div>
 
-							<div class="ilblck">
-								<p>Numero de documento</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Ocupación</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Teléfono</p>
-								<input type="" name="">
-							</div>
-							<div class="ilblck">
-								<p>Descripción</p>
-								<input type="" name="">
-							</div>
-							<div class="grid-btn">
-								<a class="btn-ico verde" href="#">
-									<span class="icon-checkmark"></span>
-								</a>
-							</div>
-						</div>
-					</article>
-				</template>
-			</section>
-			<footer>
+					<div class="ilblck">
+						<p>Numero de documento</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Ocupación</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Teléfono</p>
+						<input type="" name="">
+					</div>
+					<div class="ilblck">
+						<p>Descripción</p>
+						<input type="" name="">
+					</div>
+				</div>
+			</article>
+			</template>
+		</section>
+		<footer>
 				<div class="container-circle">
 					<div class="rela">
 						<div class="circle blanco"></div>
@@ -436,9 +376,8 @@
 					</div>
 				</div>
 			</footer>
-		</div>
 	</div>
-	<div id="div-Color"></div>
+</div>
+<div id="div-Color"></div>
 </body>
-
 </html>
