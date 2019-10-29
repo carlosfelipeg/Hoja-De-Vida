@@ -61,6 +61,26 @@ body
 	color: #4EEAF9;
 }
 
+.boton-index-agregar
+{
+	padding: .6em 1.5em;
+	color: white;
+	font-weight: bold;
+	border: 0;
+	border-radius: 30px;
+	background-color: #99CC66;
+}
+
+.boton-index-eliminar
+{
+	padding: .6em 1.5em;
+	color: white;
+	font-weight: bold;
+	border: 0;
+	border-radius: 30px;
+	background-color: red;
+}
+
 .h1-r
 {
 	font-size: 30px;
@@ -99,6 +119,8 @@ body
 #div-Color
 {
 	height: 40vw;
+}
+
 }
 
 .otrx
@@ -177,6 +199,7 @@ section
 {
 	margin: 0 auto;
 	width: 80%;
+	background-color: #f2f2f2;
 	-webkit-box-shadow: -14px 20px 24px -12px rgba(0,0,0,0.41);
 	-moz-box-shadow: -14px 20px 24px -12px rgba(0,0,0,0.41);
 	-box-shadow: -14px 20px 24px -12px rgba(0,0,0,0.41);
@@ -604,6 +627,7 @@ li:hover
 {
 	border-radius: 15px;
     background-color: white;
+    display: grid;
 }
 
 .fondoBlanco
@@ -630,15 +654,10 @@ li:hover
 
 .active
 {
-	color: white;
-	background-color: #99CC66;
+	color: black;
+	background-color: #f2f2f2;
 }
 
-.active:hover
-{
-	background-color: #66CC00;
-	transition: .8s;
-}
 
 article
 {

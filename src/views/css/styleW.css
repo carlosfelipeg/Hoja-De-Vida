@@ -69,6 +69,33 @@ body{
 	width: 20px;
 }
 
+.ilblck-btn-registro
+{
+	width: 100%;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	text-align: left;
+	padding-top: 1em;
+}
+
+.ilblck-btn-registro p
+{
+	font-size: 18px;
+	color: #777777;
+}
+
+.ilblck-btn-registro select
+{
+	border: 0;
+    border-bottom: 2px solid #999999;
+    font-size: 18px;
+}
+
+.ilblck-btn-registro select:focus
+{
+	outline: none;
+}
+
 .div-reg-two
 {
 	margin: 0 auto;

@@ -54,11 +54,25 @@
 					<input id="apellido" class="campoTxt" type="text" placeholder="Apellidos" name="apellido">
 					<div class="container-fecha-reg">
 						<p class="txt-fecha-nac">Fecha nacimiento</p>
-						<input class="datenac" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="2019-10-8"
-						min="1969-01-01" max="2011-10-8">
+						<input class="datenac" type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="2019-10-08"
+						min="1969-01-01" max="2011-10-08">
 					</div>
 					<input id="email" class="campoTxt" type="email" placeholder="Correo" name="email">
+					<input id="telefono" class="campoTxt" type="text" placeholder="Telefono" name="telefono">
+					<input id="direccion" class="campoTxt" type="direccion" placeholder="Direccion" name="direccion">
 					<input id="password" class="campoTxt" type="password" placeholder="Contraseña" name="password">
+					<div class="ilblck-btn-registro">
+						<p>Estado civil</p>
+						<select>
+						  <option value="Soltera">Solterx</option>
+						  <option value="Casada">Casadx</option>
+						  <option value="Comprometido">Comprometidx</option>
+						  <option value="UnionLibre">Unión libre</option>
+						  <option value="Separado">Separadx</option>
+						  <option value="Divorciado">Divorciadx</option>
+						  <option value="Viudo">Viudx</option>
+						</select>
+					</div>
 				</div>
 				<% if (typeof message != "undefined") { %>
 				<div>
@@ -72,7 +86,7 @@
 						<div class="cuadro-azul"></div>
 					</div>
 					<div class="btn-azul">
-						<button type="submit" formmethod="post" class="btn-continuar">CONTINUAR</button>
+						<button type="submit" formmethod="post" class="btn-continuar">Crear</button>
 						<div class="cuadro-azul-grande"></div>
 					</div>
 					<div class="blanco-azul">

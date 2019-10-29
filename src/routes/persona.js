@@ -3,30 +3,29 @@
 var express=require('express');
 var PersonaController = require('../controllers/personaController');
 
-var api= express.Router();
+var app= express.Router();
 
 
 const path = require('path');
 const fileUpload = require('express-fileupload');
-api.use(fileUpload());
+app.use(fileUpload());
 
-//var md_auth=require('../../middlewares/authenticated');
 
-//var multipart = require('connect-multiparty');
-//var md_upload= multipart({uploadDir:'./public'});
+app.post('/registro', PersonaController.saveUser);
+app.post('/informacion',PersonaController.login);
+app.post('/subirfoto',PersonaController.subirFoto);
 
-api.post('/registro', PersonaController.saveUser);
-api.post('/informacion',PersonaController.login);
-api.post('/subir_foto',PersonaController.subirFoto);
 
-api.get('/inicio', function(req, res) {
+///rutas de registro y logueo
+app.get('/inicio', function(req, res) {
     res.render('html/login');
 });
 
-api.get('/',function(req, res) {
+app.get('/',function(req, res) {
     res.render('html/registro');
 });
-api.get('/pdf',PersonaController.generarPdf);
+
+app.get('/pdf',PersonaController.generarPdf);
 
 
-module.exports=api;
+module.exports=app;

@@ -6,11 +6,11 @@ const mysql= require('mysql');
 const myConnection = require('express-myconnection');
 
 const app = express();
-//importing routes
+//importar rutas
 const personaRoutes=require('./routes/persona');
 
 
-// settings
+// configuraciones
 app.set('port', process.env.PORT||3000);
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'views'));
@@ -18,6 +18,8 @@ app.use(express.static(__dirname + '/views'));
 
 //middlewares
 app.use(morgan('dev'));
+
+//coneccion a bd
 app.use(myConnection(mysql,{
     host: 'localhost',
     user:'root',
@@ -28,7 +30,7 @@ app.use(myConnection(mysql,{
 app.use(express.urlencoded({extended:false}));
 
 
-//routes 
+//routes
 app.use('/',personaRoutes);
 
 //static files
