@@ -241,6 +241,15 @@ section
 	grid-template-columns: 40% 60%; 
 }
 
+.ilblck-date-ind
+{
+	width: 100%;
+	display: grid;
+	align-items: center;
+	margin: 0 0 1em 0;
+	grid-template-columns: 50% 50%; 
+}
+
 .ilblck-btn
 {
 	width: 100%;
@@ -255,6 +264,12 @@ section
 	grid-template-columns: 60% 10% 30%;
 }
 
+.ilblck-middle-date
+{
+	grid-template-columns: 50% 50%;
+	display: grid;
+	align-items: center;	
+}
 
 
 .ilblck-middle
@@ -274,8 +289,8 @@ section
 {
 	margin: 0 auto;
 	width: 260px;
-	display: flex;
-	grid-template-columns: 10% 80% 10%;
+	display: grid;
+	grid-template-columns: 50% 50%;
 }
 
 .blanco-azul
@@ -339,6 +354,23 @@ section
 	background-color: #5562fc;
 	border-radius: 20px;
 	transition: .8s;
+}
+
+.btn-foto
+{
+	background-color: blue;
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	color: white;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	border: 0px;
+	margin-bottom: 1em;
+	border-radius: 20px;
+	transition: .8s;
+	padding: 0;
 }
 
 .cuadro-azul-grande
@@ -714,6 +746,20 @@ textarea
 }
 
 @media (max-width: 800px){
+
+	.ilblck-date-ind
+	{
+		display: block;
+	}
+
+	.ilblck-middle
+	{
+		display: grid;
+		margin-top: 1em;
+		text-align: center;
+		grid-template-columns: 70% 50%
+	}
+
 	#div-Color
 	{
 		height: 60vw;

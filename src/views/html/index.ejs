@@ -29,23 +29,14 @@
 		<section class="flex">
 			<div class="container-img">
 				<div class="container-flex-foto">
-					<img src="../imagen/perfil.jpg">
+					<img src="../imagen/perfil.png">
 				</div>
 				<div class="container-flex-boton">
-					<div class="div-reg-three">
-						<div class="blanco-azul">
-							
-						</div>
-						<div class="btn-azul">
-							<button type="submit" formmethod="post" id="btn-ing" class="btn-continuar">EDITAR</button>
-							<div class="cuadro-azul-grande"></div>
-						</div>
-						<div class="blanco-azul">
-							
-						</div>
-					</div>
+						<form action="./subir_foto" method="POST" enctype="multipart/form-data">
+							<input name="file" type="file" />
+							<input class="btn-continuar" type="submit" value="Subir Imagen" />
+						</form>
 				</div>
-
 			</div>
 			<div class="container-info-personal">
 				<form>
@@ -59,7 +50,7 @@
 					</div>
 					<div class="ilblck">	
 						<p>Fecha Nacimiento</p>
-						<input type="date" id="start" name="trip-start" value="2019-10-08"
+						<input type="date" id="start" name="trip-start" value="<%=user.fecha%>"
 						min="1969-01-01" max="2011-10-08">
 					</div>
 					<div class="ilblck">
@@ -74,7 +65,7 @@
 						<p>Email</p>
 						<input type="text" name="" readonly value="<%=user.email%>">
 					</div>
-					<div class="ilblck-btn">
+					<div class="ilblck">
 						<p>Estado civil</p>
 						<input type="text" name="" readonly value="<%=user.estado_civil%>">
 					</div>
@@ -108,18 +99,18 @@
 
 			<article class="mo" id="tab1">
 				<div class="submo">
-					<form method="post" action="./basico">
+					<form method="post" action="./edubasica">
 					<div class="ilblck">
 						<p>Nombre de la Institucion:</p>
-						<input type="" id="basico_institucion" name="basico_institucion">
+						<input type="" id="institucion" name="basico_institucion">
 					</div>
 					<div class="ilblck">
 						<p>Año de grado:</p>
-						<input type="" id="basico_fechaGrado" name="basico_fechaGrado">
+						<input type="" id="fecha" name="basico_fechaGrado">
 					</div>
 					<div class="ilblck">
 						<p>Pais donde se graduo:</p>
-						<input type="" id="basico_pais" name="basico_pais">
+						<input type="" id="pais" name="basico_pais">
 					</div>
 					<div class="">
 						<button type="submit" formmethod="post" class="boton-index-agregar btn btn-default">Agregar</button>
@@ -129,14 +120,14 @@
 				</div>
 			</article>
 
-			<article class="mo" id="tab2">
+			 <article class="mo" id="tab2">
 				<button class="btn-ico azul cir flexright" id="add-clon">
 					<span class="icon-plus"></span>
 				</button>
 
 				<div class="sub-mo">
 					<div class="submo">
-						<form method="post" action="./superior">
+						<form method="post" action="./edusuperior">
 						<div class="ilblck middle">
 							<div class="ilblck-middle">
 								<p>Modalidad academica:</p>
@@ -175,7 +166,7 @@
 			<template id="clon">
 				<article class="mo fondoBlanco" id="tab2">
 					<div class="submo">
-					<form method="post" action="./superior2">
+					<form method="post" action="./edueducacion">
 						<div class="ilblck middle">
 							<div class="ilblck-middle">
 								<p>Modalidad academica:</p>
@@ -235,8 +226,8 @@
 							<p>Cargo:</p>
 							<input type="text" id="experiencia_cargo" name="experiencia_cargo">
 						</div>
-						<div class="ilblck">
-							<div class="ilblck-middle">
+						<div class="ilblck-date-ind">
+							<div class="ilblck-middle-date">
 								<p>Fecha ingreso:</p>
 								<input type="date" id="start" name="trip-start" value="2019-10-08"
 								min="1969-01-01" max="2011-10-08">
@@ -259,7 +250,7 @@
 			<template id="clon-dos">
 				<article class="mo fondoBlanco" id="tab3">
 					<div class="submo">
-						<form method="post" action="./experiencia2">
+						<form method="post" action="./referencia">
 						<div class="ilblck">
 							<p>Nombre de la Empresa:</p>
 							<input type="text" id="experiencia_empresa2" name="experiencia_empresa2">

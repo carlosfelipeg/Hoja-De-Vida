@@ -55,7 +55,7 @@ function subirFoto(req, res) {
 
     if (req.files) {
         var file_name = req.files.file.name;
-        console.log('hola ' + file_name);
+        console.log(file_name);
         console.log(req.body);
         var ext_split = file_name.split('\.');
         console.log(ext_split);
@@ -65,17 +65,18 @@ function subirFoto(req, res) {
 
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'gif') {
             let EDFile = req.files.file;
+            console.log(EDFile);
             EDFile.mv(`./src/public/files/${EDFile.name}`, err => {
                 if (err) return res.status(500).send({ message: err });
                 req.getConnection((err, conn) => {
-                    conn.query('UPDATE persona SET imagen WHERE documento = ?',[{ imagen: name }, userId], (err, imagenUpdate) => {
-                        if (!persona) {
+                    conn.query('UPDATE persona SET imagen WHERE documento = ?',[{ imagen: EDFile}, userId], (err, imagenUpdate) => {
+                        if (!imagenUpdate) {
                             return res.status(200).render('html/registro', {
-                                message: ''
+                                message: 'Ha ocurrido un error'
                             });
                         }else{
                         return res.status(200).render('html/login', {
-                            message: ''
+                            message: 'Actualizada correctamente'
                         });
                     }
                     });
@@ -83,7 +84,9 @@ function subirFoto(req, res) {
                
             });
         } else {
-            return removeFiles(res, file_path, 'Extension no valida');
+            return res.status(200).render('html/login', {
+                message: 'Actualizada correctamente'
+            });
         }
     } else {
         return res.status(200).send({ message: 'No se ha subido una imagen' });
@@ -93,13 +96,14 @@ function subirFoto(req, res) {
 function saveUser(req, res) {
     // variable params que me recibe el body de la solicitud
     var params = req.body;
+    console.log("parametros");
     console.log(params);
 
     //creo el usuario que voy a guardar
     var user = new Object();
 
     //compruebo que existan todos los parametros
-    if (params.documento && params.nombre && params.apellido && params.email && params.password&&params.fecha_nacimiento) {
+    if (params.documento && params.nombre && params.apellido && params.email && params.telefono &&params.direccion && params.password&&params.fecha_nacimiento) {
         
         //compruebo que no exista un usuario en la BD con el mismo email 
         req.getConnection((err, conn) => {
@@ -114,20 +118,21 @@ function saveUser(req, res) {
         });
     });
 
-
+    console.log("asignacion de parametros");
         user.documento = params.documento;
         user.nombre = params.nombre;
         user.apellido = params.apellido;
         user.email = params.email;
         user.fecha_nacimiento = params.fecha_nacimiento;
-
-        //Crifro la password  
+        user.telefono=params.telefono;
+        user.direccion=params.direccion;
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(String(params.password), salt, function (err, hash) {
                 user.password = hash;
                 req.getConnection((err, conn) => {
                     
                     conn.query('INSERT INTO persona set ?', [user], (err, persona) => {
+                        console.log("guardo")
                         console.log(persona);
                         if (!persona) {
                             return res.status(200).render('html/registro', {
@@ -135,7 +140,7 @@ function saveUser(req, res) {
                             });
                         }
 
-                       //activar para enviar email// enviarMail(user.email, user.nombre, user.apellido);
+                        //activar para enviar email// enviarMail(user.email, user.nombre, user.apellido);
                              return res.status(200).render('html/login', {
                             message: 'Registrado Correctamente'
                         });
@@ -167,7 +172,7 @@ function generarPdf(req, res) {
     }
 
     wkhtmltopdf(html).pipe(res);
-    /*
+    
     var options = {
         filename: './hojadevida.pdf', format: 'A4', orientation: 'portrait', directory: './phantomScripts/', type: "pdf"
     };
@@ -175,7 +180,6 @@ function generarPdf(req, res) {
         if (err) return console.log(err);
         console.log(res);
     });
-    */
 }
 
 function login(req, res) {
@@ -210,9 +214,38 @@ function login(req, res) {
         });
     });
 }
+
+
+
+
+/////////new
+
+
+function addeduBasica(req, res) {
+
+}
+
+function addeduSuperior(req, res) {
+
+}
+function addexperiecia(req, res) {
+
+}
+function addrecomendacion(req, res) {
+
+}
+function getedubasica(req, res){
+
+}
+
 module.exports = {
     saveUser,
     login,
     subirFoto,
-    generarPdf
+    generarPdf,
+    addeduBasica,
+    addeduSuperior,
+    addexperiecia,
+    addrecomendacion
+    
 }

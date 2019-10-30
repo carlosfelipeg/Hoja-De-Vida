@@ -4,7 +4,8 @@
   "description": "Aplicacion web usada para crear y editar la hoja de vida de tadores publicos",
   "main": "./src/index.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
