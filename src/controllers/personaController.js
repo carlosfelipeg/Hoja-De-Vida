@@ -9,7 +9,7 @@ var ejs = require('ejs');
 var wkhtmltopdf = require('wkhtmltopdf');
 
 var path = require('path');
-var jwt = require('../../services/jwt');
+
 const nodemailer = require('nodemailer');
 
 // async..await is not allowed in global scope, must use a wrapper
@@ -118,7 +118,7 @@ function saveUser(req, res) {
         });
     });
 
-    console.log("asignacion de parametros");
+    console.log("parametros :"+params);
         user.documento = params.documento;
         user.nombre = params.nombre;
         user.apellido = params.apellido;
@@ -155,6 +155,23 @@ function saveUser(req, res) {
     }
 }
 
+
+function addEduBasica(req, res) {
+    conn.query('INSERT INTO ');
+}
+
+function addEduSuperior(req, res) {
+
+}
+function addExperiecia(req, res) {
+
+}
+function addReferencia(req, res) {
+
+}
+function getEdubasica(req, res){
+
+}
 
 function generarPdf(req, res) {
 
@@ -218,34 +235,17 @@ function login(req, res) {
 
 
 
-/////////new
-
-
-function addeduBasica(req, res) {
-
-}
-
-function addeduSuperior(req, res) {
-
-}
-function addexperiecia(req, res) {
-
-}
-function addrecomendacion(req, res) {
-
-}
-function getedubasica(req, res){
-
-}
-
 module.exports = {
     saveUser,
     login,
     subirFoto,
     generarPdf,
-    addeduBasica,
-    addeduSuperior,
-    addexperiecia,
-    addrecomendacion
+    addEduBasica,
+    addEduSuperior,
+    addExperiecia,
+    addReferencia,
+    addEduSuperior,
+    addExperiecia
+    
     
 }
