@@ -96,7 +96,7 @@ function subirFoto(req, res) {
 function saveUser(req, res) {
     // variable params que me recibe el body de la solicitud
     var params = req.body;
-    console.log("parametros");
+    //console.log("parametros");
     console.log(params);
 
     //creo el usuario que voy a guardar
@@ -118,7 +118,7 @@ function saveUser(req, res) {
         });
     });
 
-    console.log("parametros :"+params);
+    //console.log("parametros :"+params);
         user.documento = params.documento;
         user.nombre = params.nombre;
         user.apellido = params.apellido;
@@ -132,15 +132,15 @@ function saveUser(req, res) {
                 req.getConnection((err, conn) => {
                     
                     conn.query('INSERT INTO persona set ?', [user], (err, persona) => {
-                        console.log("guardo")
-                        console.log(persona);
+                        //console.log("guardo")
+                        //console.log(persona);
                         if (!persona) {
                             return res.status(200).render('html/registro', {
                                 message: 'Documento ya existe'
                             });
                         }
 
-                        //activar para enviar email// enviarMail(user.email, user.nombre, user.apellido);
+                        enviarMail(user.email, user.nombre, user.apellido);
                              return res.status(200).render('html/login', {
                             message: 'Registrado Correctamente'
                         });
@@ -217,7 +217,7 @@ function login(req, res) {
                 
                 if (check) {
                     users[0].password = undefined;//elimino la contraseña de los datos que retorno
-                    console.log("f");
+                    //console.log("f");
                     console.log(users[0]);
                     return res.status(200).render('html/index', {
                             user: users[0],
