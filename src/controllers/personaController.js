@@ -3,6 +3,8 @@
 var bcrypt = require('bcryptjs');
 var fs = require('fs');
 
+var jwt = require('../services/jwt');
+
 //var pdf = require('html-pdf')
 
 var ejs = require('ejs');
@@ -36,11 +38,11 @@ async function enviarMail(email, nombre, apellido) {
     });
 
     console.log('Message sent: %s', info.messageId);
-   
 
-    
+
+
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-  
+
 }
 
 enviarMail().catch(console.error);
@@ -157,13 +159,8 @@ function addEduBasica(req, res) {
     var params = req.body;
     //console.log("parametros");
     console.log(params);
-    //creo el usuario que voy a guardar
     var eduBasica = new Object();
-
-    //compruebo que existan todos los parametros
     if (params.institucion && params.anio && params.pais) {
-
-        //console.log("parametros :"+params);
         eduBasica.documento = params.documento;
         eduBasica.nombre = params.nombre;
         eduBasica.apellido = params.apellido;
@@ -203,7 +200,6 @@ function getEdubasica(req, res) {
 function generarPdf(req, res) {
 
     try {
-        console.log('hola');
         var base = path.resolve('.');
         var file = base + '/src/pdf/pdf.ejs';
 
@@ -213,7 +209,7 @@ function generarPdf(req, res) {
         console.log(html);
 
     } catch (e) {
-        console.log(e) 
+        console.log(e)
     }
 
     var options = { format: 'Letter' };
@@ -245,16 +241,22 @@ function login(req, res) {
 
                 if (check) {
                     users[0].password = undefined;
+                    console.log("login");
                     console.log(users[0]);
-                    if(params.gettoken){
+                    const token = jwt.createToken(users[0]);
+
+                    // en caso de que la app requiera uso de tokens
+                    if (params.gettoken) {
                         //generar y devolver token
-                        return res.status(200).send({
-                            token: jwt.createToken(user)
-                        }).render('html/index', {
-                            user: users[0],
+                        return res.status(200).header('Authorization', token).send({
+                            token: jwt.createToken(users[0])
                         });
-  
-                   }
+                    }
+
+                    //req.session.user = users[0] ;
+                    // req.session.usuario = {
+                    //  documento: users[0].documento,
+                    // }
                     return res.status(200).render('html/index', {
                         user: users[0],
                     });
