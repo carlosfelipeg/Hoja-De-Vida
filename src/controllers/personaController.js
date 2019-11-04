@@ -54,28 +54,39 @@ function subirFoto(req, res) {
 
     if (req.files) {
         var file_name = req.files.file.name;
-        console.log(file_name);
-        console.log(req.body);
+        //console.log(file_name);
+       // console.log(req.body);
         var ext_split = file_name.split('\.');
-        console.log(ext_split);
+        //console.log(ext_split);
         var file_ext = ext_split[1];
-        console.log(file_ext);
+        //console.log(file_ext);
 
 
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'gif') {
+            // guardo la imagen en EDFile
             let EDFile = req.files.file;
-            console.log(EDFile);
-            EDFile.mv(`./src/public/files/${EDFile.name}`, err => {
+            //console.log(EDFile);
+            console.log('cookie');
+            console.log('documento');
+            var documento=req.session.user.documento;
+            console.log(documento);
+            console.log('imagen');
+            console.log(EDFile.name);
+            EDFile.mv(`./src/views/imagen/${documento+'.png'}`, err => {
                 if (err) return res.status(500).send({ message: err });
                 req.getConnection((err, conn) => {
-                    conn.query('UPDATE persona SET imagen WHERE documento = ?', [{ imagen: EDFile }, userId], (err, imagenUpdate) => {
+                    conn.query('UPDATE persona SET ? WHERE documento = ?', [{ imagen: documento+'.png' }, req.session.user.documento], (err, imagenUpdate) => {
+                        var newUser= req.session.user;
+                        newUser.imagen=documento+'.png';
                         if (!imagenUpdate) {
                             return res.status(200).render('html/index', {
-                                message: 'Ha ocurrido un error'
+                                message: 'Ha ocurrido un error',
+                                user: newUser
                             });
                         } else {
                             return res.status(200).render('html/index', {
-                                message: 'Actualizada correctamente'
+                                message: 'Actualizada correctamente',
+                                user: newUser
                             });
                         }
                     });
@@ -83,8 +94,9 @@ function subirFoto(req, res) {
 
             });
         } else {
-            return res.status(200).render('html/login', {
-                message: 'Actualizada correctamente'
+            return res.status(200).render('html/index', {
+                message: 'Archivo no es una imagen',
+                user: req.session.user
             });
         }
     } else {
@@ -125,6 +137,7 @@ function saveUser(req, res) {
         user.fecha_nacimiento = params.fecha_nacimiento;
         user.telefono = params.telefono;
         user.direccion = params.direccion;
+        user.imagen = 'perfil.png'
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(String(params.password), salt, function (err, hash) {
                 user.password = hash;
@@ -253,12 +266,12 @@ function login(req, res) {
                         });
                     }
 
-                    //req.session.user = users[0] ;
+                    req.session.user = users[0] ;
                     // req.session.usuario = {
                     //  documento: users[0].documento,
                     // }
                     return res.status(200).render('html/index', {
-                        user: users[0],
+                        user: req.session.user,
                     });
                 } else {
                     return res.status(200).render('html/login', {
