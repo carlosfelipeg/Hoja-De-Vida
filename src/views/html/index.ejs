@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<link rel="stylesheet" type="text/css" href="icon.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -7,366 +8,380 @@
 	<meta charset="utf-8">
 	<title>Hoja de Vida</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
 </head>
+
 <body>
 
-<div class="container-blue">
-	<div style="margin: 0 auto; width: auto; text-align: center; margin-bottom: 1.5em">
-		<!--
+	<div class="container-blue">
+		<div style="margin: 0 auto; width: auto; text-align: center; margin-bottom: 1.5em">
+			<!--
 		<a class="btn-color btn-color-b" href="">Hombre</a>
 		<a class="btn-color btn-color-r" href="">Mujer</a>
 		<a class="btn-color btn-color-o" href="">Otro</a> 
 		-->
-		<button id="" class="btn-color btn-color-b">Hombre</button>
-		<button id="" class="btn-color btn-color-r">Mujer</button>
-		<!-- <button id="" class="btn-color btn-color-o">Otro</button> -->
-	</div>
-	<div class="container-shadow">
-		<section class="flex">
-			<div class="container-img">
-				<div class="container-flex-foto">
-					<img src="../imagen/perfil.png">
-				</div>
-				<div class="container-flex-boton">
+			<button id="" class="btn-color btn-color-b">Hombre</button>
+			<button id="" class="btn-color btn-color-r">Mujer</button>
+			<!-- <button id="" class="btn-color btn-color-o">Otro</button> -->
+		</div>
+		<div class="container-shadow">
+			<section class="flex">
+				<div class="container-img">
+					<div class="container-flex-foto">
+						<img src="../imagen/perfil.png">
+					</div>
+					<div class="container-flex-boton">
 						<form action="./subir_foto" method="POST" enctype="multipart/form-data">
 							<input name="file" type="file" />
 							<input class="btn-continuar" type="submit" value="Subir Imagen" />
 						</form>
+					</div>
 				</div>
-			</div>
-			<div class="container-info-personal">
-				<form>
-					<div class="ilblck">
-						<p>Nombres</p>
-						<input type="text" name="" readonly value="<%=user.nombre%>">
-					</div>
-					<div class="ilblck">
-						<p>Apellidos</p>
-						<input type="text" name="" readonly value="<%=user.apellido%>">
-					</div>
-					<div class="ilblck">	
-						<p>Fecha Nacimiento</p>
-						<input type="date" id="start" name="trip-start" value="<%=user.fecha%>"
-						min="1969-01-01" max="2011-10-08">
-					</div>
-					<div class="ilblck">
-						<p>Dirección</p>
-						<input type="text" name="" readonly value="<%=user.direccion%>">
-					</div>
-					<div class="ilblck">
-						<p>Teléfono</p>
-						<input type="text" name="" readonly value="<%=user.telefono%>">
-					</div>
-					<div class="ilblck">
-						<p>Email</p>
-						<input type="text" name="" readonly value="<%=user.email%>">
-					</div>
-					<div class="ilblck">
-						<p>Estado civil</p>
-						<input type="text" name="" readonly value="<%=user.estado_civil%>">
-					</div>
-				</form>
-			</div>
-		</section>
-		<section id="line-color" class="line-top">
-			<article class="art-acerca">
-				<h1 id="h1ID" class="h1-b">Acerca de mi</h1>
-				<textarea name="" class="dp" cols="47" rows="7" placeholder="Descripción"></textarea>
-			
-			</article>
-		</section>
-		<section class="gray" id="contenedor-clon">
-			<div class="btn-menu">
-				<li>
-					<a id="opcion1" class="styleAbtn" href="#tab1">Educación Basica</a>
-				</li>
-				<li>
-					<a id="opcion2" class="styleAbtn" href="#tab2">Educación Superior</a>
-				</li>
-				<li>
-					<a id="opcion3" class="styleAbtn" href="#tab3">Experiencia Laboral</a>
-				</li>
-				<li>
-					<a id="opcion4" class="styleAbtn" href="#tab4">Referencia personal</a>
-				</li>
-			</div>
-			
-			
-
-			<article class="mo" id="tab1">
-				<div class="submo">
-					<form method="post">
-					<div class="ilblck">
-						<p>Nombre de la Institucion:</p>
-						<input type="" id="institucion" name="basico_institucion">
-					</div>
-					<div class="ilblck">
-						<p>Año de grado:</p>
-						<input type="" id="fecha" name="basico_fechaGrado">
-					</div>
-					<div class="ilblck">
-						<p>Pais donde se graduo:</p>
-						<input type="" id="pais" name="basico_pais">
-					</div>
-					<div class="">
-						<button type="submit" formmethod="post" formaction="/addedubasica"class="boton-index-agregar btn btn-default">Agregar</button>
-						<button type="submit" formmethod="post" class="/deleteedubasica">Eliminar</button>
-					</div>
+				<div class="container-info-personal">
+					<form>
+						<div class="ilblck">
+							<p>Nombres</p>
+							<input type="text" name="" readonly value="<%=user.nombre%>">
+						</div>
+						<div class="ilblck">
+							<p>Apellidos</p>
+							<input type="text" name="" readonly value="<%=user.apellido%>">
+						</div>
+						<div class="ilblck">
+							<p>Fecha Nacimiento</p>
+							<input type="date" id="start" name="trip-start" value="<%=user.fecha%>" min="1969-01-01"
+								max="2011-10-08">
+						</div>
+						<div class="ilblck">
+							<p>Dirección</p>
+							<input type="text" name="" readonly value="<%=user.direccion%>">
+						</div>
+						<div class="ilblck">
+							<p>Teléfono</p>
+							<input type="text" name="" readonly value="<%=user.telefono%>">
+						</div>
+						<div class="ilblck">
+							<p>Email</p>
+							<input type="text" name="" readonly value="<%=user.email%>">
+						</div>
+						<div class="ilblck">
+							<p>Estado civil</p>
+							<input type="text" name="" readonly value="<%=user.estado_civil%>">
+						</div>
 					</form>
 				</div>
-			</article>
+			</section>
+			<section id="line-color" class="line-top">
+				<article class="art-acerca">
+					<h1 id="h1ID" class="h1-b">Acerca de mi</h1>
+					<textarea name="" class="dp" cols="47" rows="7" placeholder="Descripción"></textarea>
 
-			 <article class="mo" id="tab2">
-				<button class="btn-ico azul cir flexright" id="add-clon">
-					<span class="icon-plus"></span>
-				</button>
-
-				<div class="sub-mo">
-					<div class="submo">
-						<form method="post" action="./edusuperior">
-						<div class="ilblck middle">
-							<div class="ilblck-middle">
-								<p>Modalidad academica:</p>
-								<select class="middle-select" id="superior_modalidad">
-								  <option value="tc">TC (Técnica)</option>
-								  <option value="es">ES (Especialización)</option>
-								  <option value="tl">TL (Tecnológica)</option>
-								  <option value="mg">MG (Maestría o Magister)</option>
-								  <option value="te">TE (Tecnológica especializaada)</option>
-								  <option value="doc">DOC (Doctorado o PHD)</option>
-								  <option value="un">UN (Universitaria)</option>
-								</select>
-							</div>
-						</div>
-						<div class="ilblck">
-							<p>Nombre estudios:</p>
-							<input type="text" id="superior_estudio" name="superior_estudio">
-						</div>
-						<div class="ilblck">
-							<p>Año finalización:</p>
-							<input type="text" id="superior_anio" name="superior_anio">
-						</div>
-						<div class="ilblck">
-							<p>No. de Tarjeta Profesinal:</p>
-							<input type="text"  id="superior_tarjeta" name="superior_tarjeta">
-						</div>
-						<div class="">
-							<button type="submit" formmethod="post" class="boton-index-agregar btn btn-default">Agregar</button>
-							<button type="submit" formmethod="post" class="boton-index-eliminar btn btn-default">Eliminar</button>
-						</div>
-						</form>
-					</div>
+				</article>
+			</section>
+			<section class="gray" id="contenedor-clon">
+				<div class="btn-menu">
+					<li>
+						<a id="opcion1" class="styleAbtn" href="#tab1">Educación Basica</a>
+					</li>
+					<li>
+						<a id="opcion2" class="styleAbtn" href="#tab2">Educación Superior</a>
+					</li>
+					<li>
+						<a id="opcion3" class="styleAbtn" href="#tab3">Experiencia Laboral</a>
+					</li>
+					<li>
+						<a id="opcion4" class="styleAbtn" href="#tab4">Referencia personal</a>
+					</li>
 				</div>
-			</article>
 
-			<template id="clon">
-				<article class="mo fondoBlanco" id="tab2">
+
+
+				<article class="mo" id="tab1">
 					<div class="submo">
-					<form method="post" action="./addeducacion">
-						<div class="ilblck middle">
-							<div class="ilblck-middle">
-								<p>Modalidad academica:</p>
-								<select class="middle-select" id="superior_modalidad2" name="superior_modalidad2>
-								  <option value="tc">TC (Técnica)</option>
-								  <option value="es">ES (Especialización)</option>
-								  <option value="tl">TL (Tecnológica)</option>
-								  <option value="mg">MG (Maestría o Magister)</option>
-								  <option value="te">TE (Tecnológica especializaada)</option>
-								  <option value="doc">DOC (Doctorado o PHD)</option>
-								  <option value="un">UN (Universitaria)</option>
-								</select>
+						<form method="POST">
+							<div class="ilblck">
+								<p>Nombre de la Institucion:</p>
+								<input type="" id="institucion" name="institucion">
 							</div>
-						</div>
-						<div class="ilblck">
-							<p>Nombre estudios:</p>
-							<input type="text" id="superior_estudio2" name="superior_estudio2">
-						</div>
-						<div class="ilblck">
-							<p>Año finalización:</p>
-							<input type="text" id="superior_anio2" name="superior_anio2">
-						</div>
-						<div class="ilblck">
-							<p>No. de Tarjeta Profesinal:</p>
-							<input type="text"  id="superior_tarjeta2" name="superior_tarjeta2">
-						</div>
-						<div class="">
-							<button type="submit" formmethod="post" class="boton-index-agregar btn btn-default">Agregar</button>
-							<button type="submit" formmethod="post" class="boton-index-eliminar btn btn-default">Eliminar</button>
-						</div>
+							<div class="ilblck">
+								<p>Año de grado:</p>
+								<input type="" id="anio" name="anio">
+							</div>
+							<div class="ilblck">
+								<p>Pais donde se graduo:</p>
+								<input type="" id="pais" name="pais">
+							</div>
+							<div class="">
+								<button type="submit" formmethod="post" formaction="/agregaredubasica"
+									class="boton-index-agregar btn btn-default">Agregar</button>
+								<button type="submit" formmethod="post"
+									class="boton-index-eliminar btn btn-default">Eliminar</button>
+							</div>
 						</form>
 					</div>
 				</article>
-			</template>
 
-			<article class="mo" id="tab3">
-				<button class="btn-ico azul cir flexright" id="add-clon-dos">
-					<span class="icon-plus"></span>
-				</button>
+				<article class="mo" id="tab2">
+					<button class="btn-ico azul cir flexright" id="add-clon">
+						<span class="icon-plus"></span>
+					</button>
 
-				<div class="sub-mo">
-					<div class="submo">
-						<form method="post" action="./experiencia">
-						<div class="ilblck">
-							<p>Nombre de la Empresa:</p>
-							<input type="text" id="experiencia_empresa" name="experiencia_empresa">
+					<div class="sub-mo">
+						<div class="submo">
+							<form method="post" action="./edusuperior">
+								<div class="ilblck middle">
+									<div class="ilblck-middle">
+										<p>Modalidad academica:</p>
+										<select class="middle-select" id="superior_modalidad">
+											<option value="tc">TC (Técnica)</option>
+											<option value="es">ES (Especialización)</option>
+											<option value="tl">TL (Tecnológica)</option>
+											<option value="mg">MG (Maestría o Magister)</option>
+											<option value="te">TE (Tecnológica especializaada)</option>
+											<option value="doc">DOC (Doctorado o PHD)</option>
+											<option value="un">UN (Universitaria)</option>
+										</select>
+									</div>
+								</div>
+								<div class="ilblck">
+									<p>Nombre estudios:</p>
+									<input type="text" id="superior_estudio" name="superior_estudio">
+								</div>
+								<div class="ilblck">
+									<p>Año finalización:</p>
+									<input type="text" id="superior_anio" name="superior_anio">
+								</div>
+								<div class="ilblck">
+									<p>No. de Tarjeta Profesinal:</p>
+									<input type="text" id="superior_tarjeta" name="superior_tarjeta">
+								</div>
+								<div class="">
+									<button type="submit" formmethod="post"
+										class="boton-index-agregar btn btn-default">Agregar</button>
+									<button type="submit" formmethod="post"
+										class="boton-index-eliminar btn btn-default">Eliminar</button>
+								</div>
+							</form>
 						</div>
-						<div class="ilblck">
-							<p>Pais de origen:</p>
-							<input type="text" id="experiencia_pais" name="experiencia_pais">
-						</div>
-						<div class="ilblck">
-							<p>Ciudad de origen:</p>
-							<input type="text" id="experiencia_ciudad" name="experiencia_ciudad">
-						</div>
-						<div class="ilblck">
-							<p>Cargo:</p>
-							<input type="text" id="experiencia_cargo" name="experiencia_cargo">
-						</div>
-						<div class="ilblck-date-ind">
-							<div class="ilblck-middle-date">
-								<p>Fecha ingreso:</p>
-								<input type="date" id="start" name="trip-start" value="2019-10-08"
-								min="1969-01-01" max="2011-10-08">
-							</div>
-							<div class="ilblck-middle inputDerecha">
-								<p>Fecha retiro:</p>
-								<input type="date" id="start" name="trip-start" value="2019-10-08"
-									min="1969-01-01" max="2011-10-08">
-							</div>
-						</div>	
-						<div class="">
-							<button type="submit" formmethod="post" class="boton-index-agregar btn btn-default">Agregar</button>
-							<button type="submit" formmethod="post" class="boton-index-eliminar btn btn-default">Eliminar</button>
-						</div>
-						</form>
-					</div>
-				</div>
-			</article>
-			
-			<template id="clon-dos">
-				<article class="mo fondoBlanco" id="tab3">
-					<div class="submo">
-						<form method="post" action="./referencia">
-						<div class="ilblck">
-							<p>Nombre de la Empresa:</p>
-							<input type="text" id="experiencia_empresa2" name="experiencia_empresa2">
-						</div>
-						<div class="ilblck">
-							<p>Pais de origen:</p>
-							<input type="text" id="experiencia_pais2" name="experiencia_pais2">
-						</div>
-						<div class="ilblck">
-							<p>Ciudad de origen:</p>
-							<input type="text" id="experiencia_ciudad2" name="experiencia_ciudad2">
-						</div>
-						<div class="ilblck">
-							<p>Cargo:</p>
-							<input type="text" id="experiencia_cargo2" name="experiencia_cargo2">
-						</div>
-						<div class="ilblck">
-							<div class="ilblck-middle">
-								<p>Fecha ingreso:</p>
-								<input type="date" id="start" name="trip-start" value="2019-10-08"
-								min="1969-01-01" max="2011-10-08">
-							</div>
-							<div class="ilblck-middle inputDerecha">
-								<p>Fecha retiro:</p>
-								<input type="date" id="start" name="trip-start" value="2019-10-08"
-									min="1969-01-01" max="2011-10-08">
-							</div>
-						</div>	
-						<div class="">
-							<button type="submit" formmethod="post" class="boton-index-agregar btn btn-default">Agregar</button>
-							<button type="submit" formmethod="post" class="boton-index-eliminar btn btn-default">Eliminar</button>
-						</div>
-						</form>
 					</div>
 				</article>
-			</template>
 
-			<article class="mo " id="tab4">
-				<button class="btn-ico azul cir flexright" id="add-clon-4">
-					<span class="icon-plus"></span>
-				</button>
+				<template id="clon">
+					<article class="mo fondoBlanco" id="tab2">
+						<div class="submo">
+							<form method="post" action="./addeducacion">
+								<div class="ilblck middle">
+									<div class="ilblck-middle">
+										<p>Modalidad academica:</p>
+										<select class="middle-select" id="superior_modalidad2" name="superior_modalidad2>
+								  <option value=" tc">TC (Técnica)</option>
+											<option value="es">ES (Especialización)</option>
+											<option value="tl">TL (Tecnológica)</option>
+											<option value="mg">MG (Maestría o Magister)</option>
+											<option value="te">TE (Tecnológica especializaada)</option>
+											<option value="doc">DOC (Doctorado o PHD)</option>
+											<option value="un">UN (Universitaria)</option>
+										</select>
+									</div>
+								</div>
+								<div class="ilblck">
+									<p>Nombre estudios:</p>
+									<input type="text" id="superior_estudio2" name="superior_estudio2">
+								</div>
+								<div class="ilblck">
+									<p>Año finalización:</p>
+									<input type="text" id="superior_anio2" name="superior_anio2">
+								</div>
+								<div class="ilblck">
+									<p>No. de Tarjeta Profesinal:</p>
+									<input type="text" id="superior_tarjeta2" name="superior_tarjeta2">
+								</div>
+								<div class="">
+									<button type="submit" formmethod="post"
+										class="boton-index-agregar btn btn-default">Agregar</button>
+									<button type="submit" formmethod="post"
+										class="boton-index-eliminar btn btn-default">Eliminar</button>
+								</div>
+							</form>
+						</div>
+					</article>
+				</template>
 
-				<div class="sub-mo">
-					<div class="submo">
-						<form method="post" action="./referencia"></form>
-						<div class="ilblck">
-							<p>Nombre completo</p>
-							<input type="text" id="referencia_nombre" name="referencia_nombre">
-						</div>
+				<article class="mo" id="tab3">
+					<button class="btn-ico azul cir flexright" id="add-clon-dos">
+						<span class="icon-plus"></span>
+					</button>
 
-						<div class="ilblck">
-							<p>Numero de documento</p>
-							<input type="text" id="referencia_documento" name="referencia_documento">
+					<div class="sub-mo">
+						<div class="submo">
+							<form method="post" action="./experiencia">
+								<div class="ilblck">
+									<p>Nombre de la Empresa:</p>
+									<input type="text" id="experiencia_empresa" name="experiencia_empresa">
+								</div>
+								<div class="ilblck">
+									<p>Pais de origen:</p>
+									<input type="text" id="experiencia_pais" name="experiencia_pais">
+								</div>
+								<div class="ilblck">
+									<p>Ciudad de origen:</p>
+									<input type="text" id="experiencia_ciudad" name="experiencia_ciudad">
+								</div>
+								<div class="ilblck">
+									<p>Cargo:</p>
+									<input type="text" id="experiencia_cargo" name="experiencia_cargo">
+								</div>
+								<div class="ilblck-date-ind">
+									<div class="ilblck-middle-date">
+										<p>Fecha ingreso:</p>
+										<input type="date" id="start" name="trip-start" value="2019-10-08"
+											min="1969-01-01" max="2011-10-08">
+									</div>
+									<div class="ilblck-middle inputDerecha">
+										<p>Fecha retiro:</p>
+										<input type="date" id="start" name="trip-start" value="2019-10-08"
+											min="1969-01-01" max="2011-10-08">
+									</div>
+								</div>
+								<div class="">
+									<button type="submit" formmethod="post"
+										class="boton-index-agregar btn btn-default">Agregar</button>
+									<button type="submit" formmethod="post"
+										class="boton-index-eliminar btn btn-default">Eliminar</button>
+								</div>
+							</form>
 						</div>
-						<div class="ilblck">
-							<p>Ocupación</p>
-							<input type="text" id="referencia_ocupacion" name="referencia_ocupacion">
-						</div>
-						<div class="ilblck">
-							<p>Teléfono</p>
-							<input type="text" id="referencia_telefono" name="referencia_telefono">
-						</div>
-						<div class="">
-							<button type="submit" formmethod="post" class="boton-index-agregar btn btn-default">Agregar</button>
-							<button type="submit" formmethod="post" class="boton-index-eliminar btn btn-default">Eliminar</button>
-						</div>
-					    </form>
 					</div>
-				</div>
-			</article>
+				</article>
 
-			<template  id="clon-tres">
+				<template id="clon-dos">
+					<article class="mo fondoBlanco" id="tab3">
+						<div class="submo">
+							<form method="post" action="./referencia">
+								<div class="ilblck">
+									<p>Nombre de la Empresa:</p>
+									<input type="text" id="experiencia_empresa2" name="experiencia_empresa2">
+								</div>
+								<div class="ilblck">
+									<p>Pais de origen:</p>
+									<input type="text" id="experiencia_pais2" name="experiencia_pais2">
+								</div>
+								<div class="ilblck">
+									<p>Ciudad de origen:</p>
+									<input type="text" id="experiencia_ciudad2" name="experiencia_ciudad2">
+								</div>
+								<div class="ilblck">
+									<p>Cargo:</p>
+									<input type="text" id="experiencia_cargo2" name="experiencia_cargo2">
+								</div>
+								<div class="ilblck">
+									<div class="ilblck-middle">
+										<p>Fecha ingreso:</p>
+										<input type="date" id="start" name="trip-start" value="2019-10-08"
+											min="1969-01-01" max="2011-10-08">
+									</div>
+									<div class="ilblck-middle inputDerecha">
+										<p>Fecha retiro:</p>
+										<input type="date" id="start" name="trip-start" value="2019-10-08"
+											min="1969-01-01" max="2011-10-08">
+									</div>
+								</div>
+								<div class="">
+									<button type="submit" formmethod="post"
+										class="boton-index-agregar btn btn-default">Agregar</button>
+									<button type="submit" formmethod="post"
+										class="boton-index-eliminar btn btn-default">Eliminar</button>
+								</div>
+							</form>
+						</div>
+					</article>
+				</template>
+
 				<article class="mo " id="tab4">
-				<button class="btn-ico azul cir flexright" id="add-clon-4">
-					<span class="icon-plus"></span>
-				</button>
+					<button class="btn-ico azul cir flexright" id="add-clon-4">
+						<span class="icon-plus"></span>
+					</button>
 
-				<div class="sub-mo">
-					<div class="submo">
-						<form method="post" action="./referencia"></form>
-						<div class="ilblck">
-							<p>Nombre completo</p>
-							<input type="text" id="referencia_nombre" name="referencia_nombre">
-						</div>
+					<div class="sub-mo">
+						<div class="submo">
+							<form method="post" action="./referencia"></form>
+							<div class="ilblck">
+								<p>Nombre completo</p>
+								<input type="text" id="referencia_nombre" name="referencia_nombre">
+							</div>
 
-						<div class="ilblck">
-							<p>Numero de documento</p>
-							<input type="text" id="referencia_documento" name="referencia_documento">
+							<div class="ilblck">
+								<p>Numero de documento</p>
+								<input type="text" id="referencia_documento" name="referencia_documento">
+							</div>
+							<div class="ilblck">
+								<p>Ocupación</p>
+								<input type="text" id="referencia_ocupacion" name="referencia_ocupacion">
+							</div>
+							<div class="ilblck">
+								<p>Teléfono</p>
+								<input type="text" id="referencia_telefono" name="referencia_telefono">
+							</div>
+							<div class="">
+								<button type="submit" formmethod="post"
+									class="boton-index-agregar btn btn-default">Agregar</button>
+								<button type="submit" formmethod="post"
+									class="boton-index-eliminar btn btn-default">Eliminar</button>
+							</div>
+							</form>
 						</div>
-						<div class="ilblck">
-							<p>Ocupación</p>
-							<input type="text" id="referencia_ocupacion" name="referencia_ocupacion">
-						</div>
-						<div class="ilblck">
-							<p>Teléfono</p>
-							<input type="text" id="referencia_telefono" name="referencia_telefono">
-						</div>
-						<div class="">
-							<button type="submit" formmethod="post" class="boton-index-agregar btn btn-default">Agregar</button>
-							<button type="submit" formmethod="post" class="boton-index-eliminar btn btn-default">Eliminar</button>
-						</div>
-					    </form>
 					</div>
-				</div>
-			</article>
-			</template>
+				</article>
 
-		</section>
-		<footer>
+				<template id="clon-tres">
+					<article class="mo " id="tab4">
+						<button class="btn-ico azul cir flexright" id="add-clon-4">
+							<span class="icon-plus"></span>
+						</button>
+
+						<div class="sub-mo">
+							<div class="submo">
+								<form method="post" action="./referencia"></form>
+								<div class="ilblck">
+									<p>Nombre completo</p>
+									<input type="text" id="referencia_nombre" name="referencia_nombre">
+								</div>
+
+								<div class="ilblck">
+									<p>Numero de documento</p>
+									<input type="text" id="referencia_documento" name="referencia_documento">
+								</div>
+								<div class="ilblck">
+									<p>Ocupación</p>
+									<input type="text" id="referencia_ocupacion" name="referencia_ocupacion">
+								</div>
+								<div class="ilblck">
+									<p>Teléfono</p>
+									<input type="text" id="referencia_telefono" name="referencia_telefono">
+								</div>
+								<div class="">
+									<button type="submit" formmethod="post"
+										class="boton-index-agregar btn btn-default">Agregar</button>
+									<button type="submit" formmethod="post"
+										class="boton-index-eliminar btn btn-default">Eliminar</button>
+								</div>
+								</form>
+							</div>
+						</div>
+					</article>
+				</template>
+
+			</section>
+			<footer>
 				<div class="container-circle">
 					<div class="rela">
 						<div class="circle blanco"></div>
 						<div class="cuadro verde to0"></div>
 					</div>
 					<div class="rela">
-						<div class="circle verde centrar"><a class="btn-footer" href="">PDF</a></div>
+						<div class="circle verde centrar"><a class="btn-footer" href="pdf">PDF</a></div>
 						<div class="cuadro2 verde"></div>
 					</div>
 					<div class="rela">
@@ -375,8 +390,9 @@
 					</div>
 				</div>
 			</footer>
+		</div>
 	</div>
-</div>
-<div id="div-Color"></div>
+	<div id="div-Color"></div>
 </body>
+
 </html>

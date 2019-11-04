@@ -6,7 +6,7 @@ var fs = require('fs');
 //var pdf = require('html-pdf')
 
 var ejs = require('ejs');
-var wkhtmltopdf = require('wkhtmltopdf');
+var pdf = require('html-pdf');
 
 var path = require('path');
 
@@ -14,9 +14,6 @@ const nodemailer = require('nodemailer');
 
 // async..await is not allowed in global scope, must use a wrapper
 async function enviarMail(email, nombre, apellido) {
-    // Generate test SMTP service account from ethereal.email
-    // Only needed if you don't have a real mail account for testing
-    let testAccount = await nodemailer.createTestAccount();
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -39,18 +36,18 @@ async function enviarMail(email, nombre, apellido) {
     });
 
     console.log('Message sent: %s', info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+   
 
-    // Preview only available when sending through an Ethereal account
+    
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  
 }
 
 enviarMail().catch(console.error);
 
 
 function subirFoto(req, res) {
-    
+
     console.log(req.body);
 
     if (req.files) {
@@ -69,19 +66,19 @@ function subirFoto(req, res) {
             EDFile.mv(`./src/public/files/${EDFile.name}`, err => {
                 if (err) return res.status(500).send({ message: err });
                 req.getConnection((err, conn) => {
-                    conn.query('UPDATE persona SET imagen WHERE documento = ?',[{ imagen: EDFile}, userId], (err, imagenUpdate) => {
+                    conn.query('UPDATE persona SET imagen WHERE documento = ?', [{ imagen: EDFile }, userId], (err, imagenUpdate) => {
                         if (!imagenUpdate) {
-                            return res.status(200).render('html/registro', {
+                            return res.status(200).render('html/index', {
                                 message: 'Ha ocurrido un error'
                             });
-                        }else{
-                        return res.status(200).render('html/login', {
-                            message: 'Actualizada correctamente'
-                        });
-                    }
+                        } else {
+                            return res.status(200).render('html/index', {
+                                message: 'Actualizada correctamente'
+                            });
+                        }
                     });
                 });
-               
+
             });
         } else {
             return res.status(200).render('html/login', {
@@ -103,34 +100,34 @@ function saveUser(req, res) {
     var user = new Object();
 
     //compruebo que existan todos los parametros
-    if (params.documento && params.nombre && params.apellido && params.email && params.telefono &&params.direccion && params.password&&params.fecha_nacimiento) {
-        
+    if (params.documento && params.nombre && params.apellido && params.email && params.telefono && params.direccion && params.password && params.fecha_nacimiento) {
+
         //compruebo que no exista un usuario en la BD con el mismo email 
         req.getConnection((err, conn) => {
-        var sql = 'SELECT * FROM persona WHERE email = ?';
-        conn.query(sql, [String(user.email)], (err, user) => {
-            if (user.length >= 1) {
-                return res.status(200).render('html/registro', {
-                    message: 'Email ya existe, intenta ingresando otro E-mail',
-                });
-            }
-            console.log(err);
+            var sql = 'SELECT * FROM persona WHERE email = ?';
+            conn.query(sql, [String(user.email)], (err, user) => {
+                if (user.length >= 1) {
+                    return res.status(200).render('html/registro', {
+                        message: 'Email ya existe, intenta ingresando otro E-mail',
+                    });
+                }
+                console.log(err);
+            });
         });
-    });
 
-    //console.log("parametros :"+params);
+        //console.log("parametros :"+params);
         user.documento = params.documento;
         user.nombre = params.nombre;
         user.apellido = params.apellido;
         user.email = params.email;
         user.fecha_nacimiento = params.fecha_nacimiento;
-        user.telefono=params.telefono;
-        user.direccion=params.direccion;
+        user.telefono = params.telefono;
+        user.direccion = params.direccion;
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(String(params.password), salt, function (err, hash) {
                 user.password = hash;
                 req.getConnection((err, conn) => {
-                    
+
                     conn.query('INSERT INTO persona set ?', [user], (err, persona) => {
                         //console.log("guardo")
                         //console.log(persona);
@@ -141,7 +138,7 @@ function saveUser(req, res) {
                         }
 
                         enviarMail(user.email, user.nombre, user.apellido);
-                             return res.status(200).render('html/login', {
+                        return res.status(200).render('html/login', {
                             message: 'Registrado Correctamente'
                         });
                     });
@@ -157,7 +154,37 @@ function saveUser(req, res) {
 
 
 function addEduBasica(req, res) {
-    conn.query('INSERT INTO ');
+    var params = req.body;
+    //console.log("parametros");
+    console.log(params);
+    //creo el usuario que voy a guardar
+    var eduBasica = new Object();
+
+    //compruebo que existan todos los parametros
+    if (params.institucion && params.anio && params.pais) {
+
+        //console.log("parametros :"+params);
+        eduBasica.documento = params.documento;
+        eduBasica.nombre = params.nombre;
+        eduBasica.apellido = params.apellido;
+        req.getConnection((err, conn) => {
+            conn.query('INSERT INTO formacion_academica set ?', [eduBasica], (err, newEduBasica) => {
+                if (!newEduBasica) {
+                    return res.status(200).render('html/index', {
+                        message: 'Documento ya existe'
+                    });
+                } else {
+                    return res.status(200).render('html/index', {
+                        message: 'Estudio Agregado Correctamente'
+                    });
+                }
+            });
+        });
+    } else {
+        return res.status(200).render('html/index', {
+            message: 'Debes completar todos los campos'
+        });
+    }
 }
 
 function addEduSuperior(req, res) {
@@ -169,7 +196,7 @@ function addExperiecia(req, res) {
 function addReferencia(req, res) {
 
 }
-function getEdubasica(req, res){
+function getEdubasica(req, res) {
 
 }
 
@@ -181,21 +208,22 @@ function generarPdf(req, res) {
         var file = base + '/src/pdf/pdf.ejs';
 
         var template = fs.readFileSync(file, 'utf-8');
-        var html = ejs.render(template, {});
+        var data = req.body;
+        var html = ejs.render(template, req.body);
         console.log(html);
 
     } catch (e) {
-        console.log(e)  // If any error is thrown, you can see the message.
+        console.log(e) 
     }
 
-    wkhtmltopdf(html).pipe(res);
-    
-    var options = {
-        filename: './hojadevida.pdf', format: 'A4', orientation: 'portrait', directory: './phantomScripts/', type: "pdf"
-    };
-    pdf.create(html, options).toFile(function (err, res) {
-        if (err) return console.log(err);
-        console.log(res);
+    var options = { format: 'Letter' };
+
+    pdf.create(html).toFile('./salida.pdf', function (err, res) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(res);
+        }
     });
 }
 
@@ -214,15 +242,23 @@ function login(req, res) {
                 });
             }
             bcrypt.compare(password, users[0].password, (err, check) => {//comparo la del POST con la encriptada
-                
+
                 if (check) {
-                    users[0].password = undefined;//elimino la contraseña de los datos que retorno
-                    //console.log("f");
+                    users[0].password = undefined;
                     console.log(users[0]);
-                    return res.status(200).render('html/index', {
+                    if(params.gettoken){
+                        //generar y devolver token
+                        return res.status(200).send({
+                            token: jwt.createToken(user)
+                        }).render('html/index', {
                             user: users[0],
                         });
-                }else{
+  
+                   }
+                    return res.status(200).render('html/index', {
+                        user: users[0],
+                    });
+                } else {
                     return res.status(200).render('html/login', {
                         message: 'Documento o Contraseña Incorrecta',
                     });
@@ -246,6 +282,6 @@ module.exports = {
     addReferencia,
     addEduSuperior,
     addExperiecia
-    
-    
+
+
 }

@@ -5,7 +5,7 @@ var PersonaController = require('../controllers/personaController');
 
 var app= express.Router();
 
-
+var md_auth=require('../middlewares/authenticated');
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
 
@@ -14,7 +14,7 @@ app.use(fileUpload());
 app.post('/registro', PersonaController.saveUser);
 app.post('/informacion',PersonaController.login);
 app.post('/subir_foto',PersonaController.subirFoto);
-app.post('/edubasica',PersonaController.addEduBasica);
+app.post('/agregaredubasica', md_auth.ensureAuth,PersonaController.addEduBasica);
 app.post('/agregaredusuperior',PersonaController.addEduSuperior);
 app.post('/agregarexperiencia',PersonaController.addExperiecia);
 app.post('/agregarrecomendacion',PersonaController.addReferencia);
