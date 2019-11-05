@@ -14,7 +14,7 @@ app.use(fileUpload());
 app.post('/registro', PersonaController.saveUser);
 app.post('/informacion',PersonaController.login);
 app.post('/subir_foto',PersonaController.subirFoto);
-app.post('/agregaredubasica', md_auth.ensureAuth,PersonaController.addEduBasica);
+app.post('/agregaredubasica',PersonaController.addEduBasica);
 app.post('/agregaredusuperior',PersonaController.addEduSuperior);
 app.post('/agregarexperiencia',PersonaController.addExperiecia);
 app.post('/agregarrecomendacion',PersonaController.addReferencia);

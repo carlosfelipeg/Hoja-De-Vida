@@ -49,7 +49,7 @@ $(function() {
 	});
 
 	function addClon() {
-		console.log('hola');
+		//console.log('hola');
 		contador1++;
 		var requirement = $('#clon').html();
 		// Agrego dentro del contenedor lo acaba de clonar
@@ -57,17 +57,17 @@ $(function() {
 	}
 
 	function addClon2() {
-		console.log('hola2');
+		//console.log('hola2');
 		contador2++;
-		var requirement = $('#clon').html();
+		var requirement = $('#clon-dos').html();
 		// Agrego dentro del contenedor lo acaba de clonar
 		$('#contenedor-clon').append(requirement);
 	}
 
 	function addClon3() {
 		contador3++;
-		console.log('hola3');
-		var requirement = $('#clon').html();
+		//console.log('hola3');
+		var requirement = $('#clon-tres').html();
 		// Agrego dentro del contenedor lo acaba de clonar
 		$('#contenedor-clon').append(requirement);
 	}

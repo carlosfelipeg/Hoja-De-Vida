@@ -14,7 +14,14 @@
 </head>
 
 <body>
+<!--
+	   <% if (typeof message != "undefined") { %>
+		<div>
+			<script type="text/javascript">alerta('<%=message%>');</script>
+		</div>
+		<% } %>
 
+		-->
 	<div class="container-blue">
 		<div style="margin: 0 auto; width: auto; text-align: center; margin-bottom: 1.5em">
 			<!--
@@ -128,7 +135,7 @@
 						<span class="icon-plus"></span>
 					</button>
 
-					<div class="sub-mo">
+					<div class="fondoBlanco">
 						<div class="submo">
 							<form method="post" action="./edusuperior">
 								<div class="ilblck middle">
@@ -176,7 +183,7 @@
 									<div class="ilblck-middle">
 										<p>Modalidad academica:</p>
 										<select class="middle-select" id="superior_modalidad2" name="superior_modalidad2>
-								  <option value=" tc">TC (Técnica)</option>
+								            <option value="tc">TC (Técnica)</option>
 											<option value="es">ES (Especialización)</option>
 											<option value="tl">TL (Tecnológica)</option>
 											<option value="mg">MG (Maestría o Magister)</option>
@@ -214,7 +221,7 @@
 						<span class="icon-plus"></span>
 					</button>
 
-					<div class="sub-mo">
+					<div class="fondoBlanco">
 						<div class="submo">
 							<form method="post" action="./experiencia">
 								<div class="ilblck">
@@ -304,7 +311,7 @@
 						<span class="icon-plus"></span>
 					</button>
 
-					<div class="sub-mo">
+					<div class="fondoBlanco">
 						<div class="submo">
 							<form method="post" action="./referencia"></form>
 							<div class="ilblck">
@@ -336,12 +343,8 @@
 				</article>
 
 				<template id="clon-tres">
-					<article class="mo " id="tab4">
-						<button class="btn-ico azul cir flexright" id="add-clon-4">
-							<span class="icon-plus"></span>
-						</button>
-
-						<div class="sub-mo">
+					<article class="mo fondoBlanco" id="tab4">
+						<div class="">
 							<div class="submo">
 								<form method="post" action="./referencia"></form>
 								<div class="ilblck">

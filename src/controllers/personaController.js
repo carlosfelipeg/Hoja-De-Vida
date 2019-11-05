@@ -174,18 +174,22 @@ function addEduBasica(req, res) {
     console.log(params);
     var eduBasica = new Object();
     if (params.institucion && params.anio && params.pais) {
-        eduBasica.documento = params.documento;
-        eduBasica.nombre = params.nombre;
-        eduBasica.apellido = params.apellido;
+      //  eduBasica.documento = req.session.user.documento;
+        eduBasica.pais_origen=params.pais;
+        eduBasica.nombre_institucion=params.institucion;
+        eduBasica.anio_grado=params.anio;
         req.getConnection((err, conn) => {
             conn.query('INSERT INTO formacion_academica set ?', [eduBasica], (err, newEduBasica) => {
                 if (!newEduBasica) {
+                    console.log('no add');
                     return res.status(200).render('html/index', {
-                        message: 'Documento ya existe'
+                        message: 'Error al Agregar',
+                        user: req.session.user
                     });
                 } else {
                     return res.status(200).render('html/index', {
-                        message: 'Estudio Agregado Correctamente'
+                        message: 'Agregada Correctamente',
+                        user: req.session.user
                     });
                 }
             });
@@ -254,8 +258,6 @@ function login(req, res) {
 
                 if (check) {
                     users[0].password = undefined;
-                    console.log("login");
-                    console.log(users[0]);
                     const token = jwt.createToken(users[0]);
 
                     // en caso de que la app requiera uso de tokens
@@ -265,11 +267,11 @@ function login(req, res) {
                             token: jwt.createToken(users[0])
                         });
                     }
+                    console.log(users[0].fecha_nacimiento);
 
                     req.session.user = users[0] ;
-                    // req.session.usuario = {
-                    //  documento: users[0].documento,
-                    // }
+                    console.log('session');
+                    console.log(req.session.user);
                     return res.status(200).render('html/index', {
                         user: req.session.user,
                     });
