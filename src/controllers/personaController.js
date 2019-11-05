@@ -66,12 +66,12 @@ function subirFoto(req, res) {
             // guardo la imagen en EDFile
             let EDFile = req.files.file;
             //console.log(EDFile);
-            console.log('cookie');
-            console.log('documento');
+           // console.log('cookie');
+           // console.log('documento');
             var documento=req.session.user.documento;
-            console.log(documento);
-            console.log('imagen');
-            console.log(EDFile.name);
+            //console.log(documento);
+            //console.log('imagen');
+           // console.log(EDFile.name);
             EDFile.mv(`./src/views/imagen/${documento+'.png'}`, err => {
                 if (err) return res.status(500).send({ message: err });
                 req.getConnection((err, conn) => {
@@ -107,7 +107,7 @@ function subirFoto(req, res) {
 function saveUser(req, res) {
     // variable params que me recibe el body de la solicitud
     var params = req.body;
-    //console.log("parametros");
+    console.log("parametros");
     console.log(params);
 
     //creo el usuario que voy a guardar
@@ -134,6 +134,7 @@ function saveUser(req, res) {
         user.nombre = params.nombre;
         user.apellido = params.apellido;
         user.email = params.email;
+        user.estado_civil = params.estado_civil;
         user.fecha_nacimiento = params.fecha_nacimiento;
         user.telefono = params.telefono;
         user.direccion = params.direccion;
@@ -171,22 +172,37 @@ function saveUser(req, res) {
 function addEduBasica(req, res) {
     var params = req.body;
     //console.log("parametros");
-    console.log(params);
+    //console.log(params);
     var eduBasica = new Object();
     if (params.institucion && params.anio && params.pais) {
-      //  eduBasica.documento = req.session.user.documento;
         eduBasica.pais_origen=params.pais;
         eduBasica.nombre_institucion=params.institucion;
         eduBasica.anio_grado=params.anio;
         req.getConnection((err, conn) => {
             conn.query('INSERT INTO formacion_academica set ?', [eduBasica], (err, newEduBasica) => {
+                var id=newEduBasica.insertId;
                 if (!newEduBasica) {
-                    console.log('no add');
                     return res.status(200).render('html/index', {
                         message: 'Error al Agregar',
                         user: req.session.user
                     });
                 } else {
+                    var formacion_persona = new Object();
+                    formacion_persona.documento_persona=req.session.user.documento;
+                    formacion_persona.id_formacion=id;
+                    conn.query('INSERT INTO formacion_persona set ?', [formacion_persona], (err, newformacion) => {
+                       if (!newformacion) {
+                            return res.status(200).render('html/index', {
+                                message: 'Error al Agregar',
+                                user: req.session.user
+                            });
+                        } else {
+                            return res.status(200).render('html/index', {
+                                message: 'Agregada Correctamente',
+                                user: req.session.user
+                            });
+                        }
+                    });
                     return res.status(200).render('html/index', {
                         message: 'Agregada Correctamente',
                         user: req.session.user
@@ -202,20 +218,170 @@ function addEduBasica(req, res) {
 }
 
 function addEduSuperior(req, res) {
-
+    var params = req.body;
+    console.log("parametros");
+    console.log(params);
+    var userR= (req.session.user);
+    var eduSuperior = new Object();
+    if (params.superior_tarjeta &&params.superior_anio&& params.superior_estudio&&params.superior_modalidad) {
+        eduSuperior.num_tarjetaProfesional=parseInt(params.superior_tarjeta);
+        eduSuperior.nombre_estudio=params.superior_estudio;
+        eduSuperior.anio_finalizacion=parseInt(params.superior_anio);
+        eduSuperior.modalidad=params.superior_modalidad;
+        console.log("edu agg");
+        console.log(eduSuperior);
+        req.getConnection((err, conn) => {
+            conn.query('INSERT INTO educacion_superior set ?', [eduSuperior], (err, newEduSuperior) => {
+                var id=newEduSuperior.insertId;
+                if (!newEduSuperior) {
+                    return res.status(200).render('html/index', {
+                        user: userR
+                    });
+                } else {
+                    var postgrado_persona = new Object();
+                    postgrado_persona.documento_persona=req.session.user.documento;
+                    postgrado_persona.num_tarjeta=params.superior_tarjeta;
+                    conn.query('INSERT INTO postgrado_persona set ?', [postgrado_persona], (err, newformacion) => {
+                        if (!newformacion) {
+                            return res.status(200).render('html/index', {
+                                message: 'Error al Agregar',
+                                user: userR
+                            });
+                        } else {
+                            return res.status(200).render('html/index', {
+                                message: 'Agregada Correctamente',
+                                user:userR
+                            });
+                        }
+                    });
+                    return res.status(200).render('html/index', {
+                        message: 'Agregada Correctamente',
+                        user: req.session.user
+                    });
+                }
+            });
+        });
+    } else {
+        return res.status(200).render('html/index', {
+            message: 'Debes completar todos los campos',
+            user: userR
+        });
+    }
 }
 function addExperiecia(req, res) {
-
+    var params = req.body;
+    console.log("parametros");
+    console.log(params);
+    var userR= (req.session.user);
+    var experiencia = new Object();
+    if (params.experiencia_empresa &&params.experiencia_pais&& params.experiencia_ciudad&&params.experiencia_cargo) {
+        experiencia.nombre_empresa=params.experiencia_empresa;
+        experiencia.cargo_ocupado=params.experiencia_cargo;
+        experiencia.fecha_inicio=params.fecha_ingreso;
+        experiencia.fecha_fin=params.fecha_retiro;
+        experiencia.pais= params.experiencia_pais;
+        experiencia.ciudad= params.experiencia_ciudad;
+        console.log('exp');
+        console.log(experiencia);
+        req.getConnection((err, conn) => {
+            conn.query('INSERT INTO experiencia_laboral set ?', [experiencia], (err, newExperiencia) => {
+                console.log(newExperiencia);
+                var id=newExperiencia.insertId;
+                if (!newExperiencia) {
+                    return res.status(200).render('html/index', {
+                        user: userR
+                    });
+                } else {
+                    var postgrado_persona = new Object();
+                    postgrado_persona.documento_persona=req.session.user.documento;
+                    postgrado_persona.id_experiencia=id;
+                    conn.query('INSERT INTO trabajos set ?', [postgrado_persona], (err, newexp) => {
+                        if (!newexp) {
+                            return res.status(200).render('html/index', {
+                                message: 'Error al Agregar',
+                                user: userR
+                            });
+                        } else {
+                            return res.status(200).render('html/index', {
+                                message: 'Agregada Correctamente',
+                                user:userR
+                            });
+                        }
+                    });
+                    return res.status(200).render('html/index', {
+                        message: 'Agregada Correctamente',
+                        user: req.session.user
+                    });
+                }
+            });
+        });
+    } else {
+        return res.status(200).render('html/index', {
+            message: 'Debes completar todos los campos',
+            user: userR
+        });
+    }
 }
 function addReferencia(req, res) {
+    var params = req.body;
+    console.log("parametros");
+    console.log(params);
+    var userR= (req.session.user);
+    var referencia = new Object();
+    if (params.referencia_nombre&&params.referencia_documento&& params.referencia_ocupacion&&params.referencia_telefono) {
+        referencia.documento=parseInt(params.referencia_documento);
+        referencia.nombre=params.referencia_nombre;
+        referencia.telefono=parseInt(params.referencia_telefono);
+        referencia.cargo_ocupado= params.referencia_ocupacion;
+       
+        //console.log('ref');
+        //console.log(referencia);
+        req.getConnection((err, conn) => {
+            conn.query('INSERT INTO referencia set ?', [referencia], (err, newReferencia) => {
+               // console.log(newReferencia);
+               // var id=newExperiencia.insertId;
+                if (!newReferencia) {
+                    return res.status(200).render('html/index', {
+                        user: userR
+                    });
+                } else {
+                    var referencia_persona = new Object();
+                    referencia_persona.documento_referido=req.session.user.documento;
+                    referencia_persona.documento_referente=params.referencia_documento;
+                    conn.query('INSERT INTO referencia_persona set ?', [referencia_persona], (err, newref) => {
+                        if (!newref) {
+                            return res.status(200).render('html/index', {
+                                message: 'Error al Agregar',
+                                user: userR
+                            });
+                        } else {
+                            return res.status(200).render('html/index', {
+                                message: 'Agregada Correctamente',
+                                user:userR
+                            });
+                        }
+                    });
+                    return res.status(200).render('html/index', {
+                        message: 'Agregada Correctamente',
+                        user: req.session.user
+                    });
+                }
+            });
+        });
+    } else {
+        return res.status(200).render('html/index', {
+            message: 'Debes completar todos los campos',
+            user: userR
+        });
+    }
 
 }
 function getEdubasica(req, res) {
 
 }
 function addDescripcion(req, res) {
-    console.log('params descripcion');
-    console.log(req.body);
+    //console.log('params descripcion');
+    //console.log(req.body);
     req.getConnection((err, conn) => {
         conn.query('UPDATE persona SET ? WHERE documento = ?', [{ descripcion: req.body.descripcion}, req.session.user.documento], (err, descripcionUpdated) => {
             var newUser= req.session.user;
@@ -242,10 +408,10 @@ function generarPdf(req, res) {
         var file = base + '/src/views/html/pdf.ejs';
 
         var template = fs.readFileSync(file, 'utf-8');
-        console.log('SESSSS');
-        console.log(req.session);
+        //console.log('SESSSS');
+        //console.log(req.session);
         var html = ejs.render(template, req.session);
-        console.log(html);
+       // console.log(html);
 
     } catch (e) {
         console.log(e)
@@ -259,8 +425,8 @@ function generarPdf(req, res) {
     });
     
     pdf.create(html).toFile('./salida.pdf', function (err, res) {
-        console.log('DIRNAME');
-        console.log(__dirname);
+        //console.log('DIRNAME');
+       // console.log(__dirname);
         var file=  __dirname+'salida.pdf';
         //res.download(file); 
         if (err) {
@@ -302,7 +468,6 @@ function login(req, res) {
                             token: jwt.createToken(users[0])
                         });
                     }
-                    console.log(users[0].fecha_nacimiento);
 
                     req.session.user = users[0] ;
                     console.log('session');

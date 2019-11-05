@@ -58,8 +58,8 @@
 						</div>
 						<div class="ilblck">
 							<p>Fecha Nacimiento</p>
-							<input type="date" id="start" name="trip-start" value="<%=user.fecha%>" min="1969-01-01"
-								max="2011-10-08">
+							<input type="date" id="start" name="fecha_nacimiento" value="<%=user.fecha%>" min="1969-01-01"
+								max="2019-10-08">
 						</div>
 						<div class="ilblck">
 							<p>Dirección</p>
@@ -153,11 +153,11 @@
 
 					<div class="fondoBlanco">
 						<div class="submo">
-							<form method="post" action="./edusuperior">
+							<form method="POST" >
 								<div class="ilblck middle">
 									<div class="ilblck-middle">
 										<p>Modalidad academica:</p>
-										<select class="middle-select" id="superior_modalidad">
+										<select class="middle-select" name="superior_modalidad" id="superior_modalidad">
 											<option value="tc">TC (Técnica)</option>
 											<option value="es">ES (Especialización)</option>
 											<option value="tl">TL (Tecnológica)</option>
@@ -181,7 +181,7 @@
 									<input type="text" id="superior_tarjeta" name="superior_tarjeta">
 								</div>
 								<div class="">
-									<button type="submit" formmethod="post"
+									<button type="submit" formmethod="post" formaction="./agregaredusuperior"
 										class="boton-index-agregar btn btn-default">Agregar</button>
 									<button type="submit" formmethod="post"
 										class="boton-index-eliminar btn btn-default">Eliminar</button>
@@ -194,7 +194,7 @@
 				<template id="clon">
 					<article class="mo fondoBlanco" id="tab2">
 						<div class="submo">
-							<form method="post" action="./addeducacion">
+							<form method="POST">
 								<div class="ilblck middle">
 									<div class="ilblck-middle">
 										<p>Modalidad academica:</p>
@@ -222,7 +222,7 @@
 									<input type="text" id="superior_tarjeta2" name="superior_tarjeta2">
 								</div>
 								<div class="">
-									<button type="submit" formmethod="post"
+									<button type="submit" formmethod="post" formaction="./agregaredusuperior"
 										class="boton-index-agregar btn btn-default">Agregar</button>
 									<button type="submit" formmethod="post"
 										class="boton-index-eliminar btn btn-default">Eliminar</button>
@@ -239,7 +239,7 @@
 
 					<div class="fondoBlanco">
 						<div class="submo">
-							<form method="post" action="./experiencia">
+							<form method="POST">
 								<div class="ilblck">
 									<p>Nombre de la Empresa:</p>
 									<input type="text" id="experiencia_empresa" name="experiencia_empresa">
@@ -259,17 +259,17 @@
 								<div class="ilblck-date-ind">
 									<div class="ilblck-middle-date">
 										<p>Fecha ingreso:</p>
-										<input type="date" id="start" name="trip-start" value="2019-10-08"
-											min="1969-01-01" max="2011-10-08">
+										<input type="date" id="start" name="fecha_ingreso" value="2019-10-08"
+											min="1969-01-01" max="2019-10-08">
 									</div>
 									<div class="ilblck-middle inputDerecha">
 										<p>Fecha retiro:</p>
-										<input type="date" id="start" name="trip-start" value="2019-10-08"
-											min="1969-01-01" max="2011-10-08">
+										<input type="date" id="start" name="fecha_retiro" value="2019-10-08"
+											min="1969-01-01" max="2019-10-08">
 									</div>
 								</div>
 								<div class="">
-									<button type="submit" formmethod="post"
+									<button type="submit" formmethod="post" formaction="./agregarexperiencia"
 										class="boton-index-agregar btn btn-default">Agregar</button>
 									<button type="submit" formmethod="post"
 										class="boton-index-eliminar btn btn-default">Eliminar</button>
@@ -282,7 +282,7 @@
 				<template id="clon-dos">
 					<article class="mo fondoBlanco" id="tab3">
 						<div class="submo">
-							<form method="post" action="./referencia">
+							<form method="POST">
 								<div class="ilblck">
 									<p>Nombre de la Empresa:</p>
 									<input type="text" id="experiencia_empresa2" name="experiencia_empresa2">
@@ -302,17 +302,17 @@
 								<div class="ilblck">
 									<div class="ilblck-middle">
 										<p>Fecha ingreso:</p>
-										<input type="date" id="start" name="trip-start" value="2019-10-08"
-											min="1969-01-01" max="2011-10-08">
+										<input type="date" id="start" name="fecha_ingreso" value="2019-10-08"
+											min="1969-01-01" max="2019-10-08">
 									</div>
 									<div class="ilblck-middle inputDerecha">
 										<p>Fecha retiro:</p>
-										<input type="date" id="start" name="trip-start" value="2019-10-08"
-											min="1969-01-01" max="2011-10-08">
+										<input type="date" id="start" name="fecha_retiro" value="2019-10-08"
+											min="1969-01-01" max="2019-10-08">
 									</div>
 								</div>
 								<div class="">
-									<button type="submit" formmethod="post"
+									<button type="submit" formmethod="post" formaction="./agregarexperiencia"
 										class="boton-index-agregar btn btn-default">Agregar</button>
 									<button type="submit" formmethod="post"
 										class="boton-index-eliminar btn btn-default">Eliminar</button>
@@ -329,7 +329,7 @@
 
 					<div class="fondoBlanco">
 						<div class="submo">
-							<form method="post" action="./referencia"></form>
+							<form method="POST">
 							<div class="ilblck">
 								<p>Nombre completo</p>
 								<input type="text" id="referencia_nombre" name="referencia_nombre">
@@ -348,7 +348,7 @@
 								<input type="text" id="referencia_telefono" name="referencia_telefono">
 							</div>
 							<div class="">
-								<button type="submit" formmethod="post"
+								<button type="submit" formmethod="post" formaction="./agregarreferencia"
 									class="boton-index-agregar btn btn-default">Agregar</button>
 								<button type="submit" formmethod="post"
 									class="boton-index-eliminar btn btn-default">Eliminar</button>
@@ -362,7 +362,7 @@
 					<article class="mo fondoBlanco" id="tab4">
 						<div class="">
 							<div class="submo">
-								<form method="post" action="./referencia"></form>
+								<form method="POST">
 								<div class="ilblck">
 									<p>Nombre completo</p>
 									<input type="text" id="referencia_nombre" name="referencia_nombre">
@@ -381,7 +381,7 @@
 									<input type="text" id="referencia_telefono" name="referencia_telefono">
 								</div>
 								<div class="">
-									<button type="submit" formmethod="post"
+									<button type="submit" formmethod="post" formaction="./agregarreferencia"
 										class="boton-index-agregar btn btn-default">Agregar</button>
 									<button type="submit" formmethod="post"
 										class="boton-index-eliminar btn btn-default">Eliminar</button>
