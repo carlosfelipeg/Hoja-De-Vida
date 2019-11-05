@@ -18,7 +18,7 @@ app.post('/agregaredubasica',PersonaController.addEduBasica);
 app.post('/agregaredusuperior',PersonaController.addEduSuperior);
 app.post('/agregarexperiencia',PersonaController.addExperiecia);
 app.post('/agregarrecomendacion',PersonaController.addReferencia);
-
+app.post('/descripcion',PersonaController.addDescripcion);
 app.post('/pdf',PersonaController.generarPdf)
 
 ///rutas de registro y logueo

@@ -56,8 +56,6 @@
 			width: 100%;
 		}
 
-		.txt-lista {}
-
 		.campo {
 			border: 0;
 			border-bottom: 1px solid #424242;
@@ -110,22 +108,25 @@
 
 	<section class="contenedor-datos-personales">
 		<div class="container-foto">
-			<img class="foto" src="perfil.jpg">
+				<img style="width:100%;
+				height:100%;
+				object-position: center;
+				object-fit:cover;" src="../imagen/<%=user.imagen%>">
 		</div>
 		<div class="container-datos">
 			<div class="margen-datos">
 				<p class="txt-title">DATOS PERSONALES</p>
 				<div class="container-txt">
 					<p class="txt-lista">Nombres:</p>
-					<input id="" class="campo" type="" name="">
+					<input id="" class="campo" type="" name=""readonly value="<%=user.nombre%>">
 				</div>
 				<div class="container-txt">
 					<p class="txt-lista">Apellidos:</p>
-					<input id="" class="campo" type="" name="">
+					<input id="" class="campo" type="" name=""readonly value="<%=user.apellido%>">
 				</div>
 				<div class="container-txt">
 					<p class="txt-lista">Fecha nacimiento:</p>
-					<input id="" class="campo" type="" name="">
+					<input id="" class="campo" type="" name=""readonly value="<%=user.fecha_nacimiento%>">
 				</div>
 				<div class="container-txt">
 					<p class="txt-lista">Dirección:</p>
@@ -133,19 +134,19 @@
 				</div>
 				<div class="container-txt">
 					<p class="txt-lista">Telefono:</p>
-					<input id="" class="campo" type="" name="">
+					<input id="" class="campo" type="" name=""readonly value="<%=user.telefono%>">
 				</div>
 				<div class="container-txt">
 					<p class="txt-lista">Correo:</p>
-					<input id="" class="campo" type="" name="">
+					<input id="" class="campo" type="" name=""readonly value="<%=user.email%>">
 				</div>
 				<div class="container-txt">
 					<p class="txt-lista">Estado civil:</p>
-					<input id="" class="campo" type="" name="">
+					<input id="" class="campo" type="" name=""readonly value="<%=user.estado_civil%>">
 				</div>
 				<div class="container-txt">
 					<p class="txt-lista">Sexo:</p>
-					<input id="" class="campo" type="" name="">
+					<input id="" class="campo" type="" name=""readonly value="<%=user.genero%>">
 				</div>
 			</div>
 		</div>

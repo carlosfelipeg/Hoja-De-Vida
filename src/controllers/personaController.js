@@ -213,16 +213,38 @@ function addReferencia(req, res) {
 function getEdubasica(req, res) {
 
 }
+function addDescripcion(req, res) {
+    console.log('params descripcion');
+    console.log(req.body);
+    req.getConnection((err, conn) => {
+        conn.query('UPDATE persona SET ? WHERE documento = ?', [{ descripcion: req.body.descripcion}, req.session.user.documento], (err, descripcionUpdated) => {
+            var newUser= req.session.user;
+            newUser.descripcion= req.body.descripcion;
+            if (! descripcionUpdated) {
+                return res.status(200).render('html/index', {
+                    message: 'Ha ocurrido un error',
+                    user: newUser
+                });
+            } else {
+                return res.status(200).render('html/index', {
+                    message: 'Actualizada correctamente',
+                    user: newUser
+                });
+            }
+        });
+    });
+}
 
 function generarPdf(req, res) {
 
     try {
         var base = path.resolve('.');
-        var file = base + '/src/pdf/pdf.ejs';
+        var file = base + '/src/views/html/pdf.ejs';
 
         var template = fs.readFileSync(file, 'utf-8');
-        var data = req.body;
-        var html = ejs.render(template, req.body);
+        console.log('SESSSS');
+        console.log(req.session);
+        var html = ejs.render(template, req.session);
         console.log(html);
 
     } catch (e) {
@@ -231,12 +253,25 @@ function generarPdf(req, res) {
 
     var options = { format: 'Letter' };
 
+    res.status(200).render('html/pdf', {
+        message: 'PDF Creado',
+        user: req.session.user
+    });
+    
     pdf.create(html).toFile('./salida.pdf', function (err, res) {
+        console.log('DIRNAME');
+        console.log(__dirname);
+        var file=  __dirname+'salida.pdf';
+        //res.download(file); 
         if (err) {
             console.log(err);
         } else {
             console.log(res);
         }
+    });
+    return res.status(200).render('html/pdf', {
+        message: 'PDF Creado',
+        user: req.session.user
     });
 }
 
@@ -298,7 +333,8 @@ module.exports = {
     addExperiecia,
     addReferencia,
     addEduSuperior,
-    addExperiecia
+    addExperiecia,
+    addDescripcion
 
 
 }

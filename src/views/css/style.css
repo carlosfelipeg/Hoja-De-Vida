@@ -293,6 +293,15 @@ section
 	grid-template-columns: 50% 50%;
 }
 
+.div-reg-three-2
+{
+	margin: 0 auto;
+	width: 260px;
+	display: flex;
+	padding-bottom: 1.5em;
+	grid-template-columns: 10% 80% 10%;
+}
+
 .blanco-azul
 {
 	position: relative;

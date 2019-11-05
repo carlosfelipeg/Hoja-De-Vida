@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<!--
+	<!--
 	   <% if (typeof message != "undefined") { %>
 		<div>
 			<script type="text/javascript">alerta('<%=message%>');</script>
@@ -83,7 +83,23 @@
 			<section id="line-color" class="line-top">
 				<article class="art-acerca">
 					<h1 id="h1ID" class="h1-b">Acerca de mi</h1>
-					<textarea name="" class="dp" cols="47" rows="7" placeholder="Descripción"></textarea>
+
+					<div class="div-reg-three-2">
+						<div class="btn-azul">
+							<form method="POST">
+									<% if (typeof user.descripcion != "undefined") { %>
+										<input name="descripcion" class="dp" cols="47" rows="7" value="<%=user.descripcion%>"></input>
+										<% } else{%>
+									<input name="descripcion" class="dp" cols="47" rows="7" placeholder="Descripción"></input>
+									<%}%>
+								<button type="submit" formmethod="post" id="btn-ing" class="btn-continuar" formaction="./descripcion">GUARDAR</button>
+							</form>
+							<div class="cuadro-azul-grande"></div>
+						</div>
+						<div class="blanco-azul">
+
+						</div>
+					</div>
 
 				</article>
 			</section>
@@ -183,7 +199,7 @@
 									<div class="ilblck-middle">
 										<p>Modalidad academica:</p>
 										<select class="middle-select" id="superior_modalidad2" name="superior_modalidad2>
-								            <option value="tc">TC (Técnica)</option>
+								            <option value=" tc">TC (Técnica)</option>
 											<option value="es">ES (Especialización)</option>
 											<option value="tl">TL (Tecnológica)</option>
 											<option value="mg">MG (Maestría o Magister)</option>
