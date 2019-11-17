@@ -1,6 +1,6 @@
-function alerta(mensaje,flag){
-    console.log(mensaje);
-    if(mensaje=='Registrado Correctamente'){
+function alerta(mensaje,error){
+    console.log(error);
+    if(error=='false'){
         Swal.fire({
             position: 'top-end',
             type: 'success',

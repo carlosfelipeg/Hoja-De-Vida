@@ -11,6 +11,8 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
+	<script src="../plugins/sweetAlert2/sweetalert2.all.min.js"></script>
+	<script src="../js/alerta.js"></script>
 </head>
 
 <body>
@@ -58,8 +60,8 @@
 						</div>
 						<div class="ilblck">
 							<p>Fecha Nacimiento</p>
-							<input type="date" id="start" name="fecha_nacimiento" value="<%=user.fecha%>" min="1969-01-01"
-								max="2019-10-08">
+							<input type="date" id="start" name="fecha_nacimiento" value="<%=user.fecha%>"
+								min="1969-01-01" max="2019-10-08">
 						</div>
 						<div class="ilblck">
 							<p>Dirección</p>
@@ -87,11 +89,13 @@
 					<div class="div-reg-three-2">
 						<div class="btn-azul">
 							<form method="POST">
-									<% if (typeof user.descripcion != "undefined") { %>
-										<input name="descripcion" class="dp" cols="47" rows="7" value="<%=user.descripcion%>"></input>
-										<% } else{%>
-									<input name="descripcion" class="dp" cols="47" rows="7" placeholder="Descripción"></input>
-									<%}%>
+								<% if (typeof user.descripcion != "undefined") { %>
+								<input name="descripcion" class="dp" cols="47" rows="7"
+									value="<%=user.descripcion%>"></input>
+								<% } else{%>
+								<input name="descripcion" class="dp" cols="47" rows="7"
+									placeholder="Descripción"></input>
+								<%}%>
 								<button type="submit" formmethod="post" id="btn-ing" class="btn-continuar" formaction="./descripcion">GUARDAR</button>
 							</form>
 							<div class="cuadro-azul-grande"></div>
@@ -118,10 +122,40 @@
 						<a id="opcion4" class="styleAbtn" href="#tab4">Referencia personal</a>
 					</li>
 				</div>
-
+						<div>
+								<% if (typeof message != "undefined") { %>
+								<div>
+									<script type="text/javascript">alerta('<%=message%>', '<%=error%>');</script>
+								</div>
+								<%}%>
+						</div>
 
 
 				<article class="mo" id="tab1">
+						<% if (typeof educacion.id_formacion!="undefined") { %>
+							<div class="submo">
+									<form method="POST">
+										<div class="ilblck">
+											<p>Nombre de la Institucion:</p>
+											<input type="" id="institucion" name="institucion" value="<%=educacion.nombre_institucion%>">
+										</div>
+										<div class="ilblck">
+											<p>Año de grado:</p>
+											<input type="" id="anio" name="anio" value="<%=educacion.anio_grado%>">
+										</div>
+										<div class="ilblck">
+											<p>Pais donde se graduo:</p>
+											<input type="" id="pais" name="pais"value="<%=educacion.pais_origen%>">
+										</div>
+										<div class="">
+												<button type="submit" formmethod="post" formaction="/agregaredubasica"
+												class="boton-index-agregar btn btn-default">Editar</button>
+											<button type="submit" formmethod="post"
+												class="boton-index-eliminar btn btn-default">Eliminar</button>
+										</div>
+									</form>
+								</div>
+							<%}else{%>
 					<div class="submo">
 						<form method="POST">
 							<div class="ilblck">
@@ -144,6 +178,7 @@
 							</div>
 						</form>
 					</div>
+					<%}%>
 				</article>
 
 				<article class="mo" id="tab2">

@@ -75,10 +75,8 @@
 					</div>
 				</div>
 				<% if (typeof message != "undefined") { %>
-				<div>
-					<script type="text/javascript">alerta('<%=message%>');</script>
-				</div>
-				<% } %>
+					<div><script type="text/javascript">alerta('<%=message%>','<%=error%>');</script></div>
+				<%}%>
 
 				<div class="div-reg-three">
 					<div class="blanco-azul">
