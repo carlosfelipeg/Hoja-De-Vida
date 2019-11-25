@@ -132,7 +132,7 @@
 
 
 				<article class="mo" id="tab1">
-						<% if (typeof educacion.id_formacion!="undefined") { %>
+						<% if (educacion) { %>
 							<div class="submo">
 									<form method="POST">
 										<div class="ilblck">
@@ -186,6 +186,7 @@
 						<span class="icon-plus"></span>
 					</button>
 
+					<% if (educacionSuperior) { %>
 					<div class="fondoBlanco">
 						<div class="submo">
 							<form method="POST" >
@@ -205,7 +206,7 @@
 								</div>
 								<div class="ilblck">
 									<p>Nombre estudios:</p>
-									<input type="text" id="superior_estudio" name="superior_estudio">
+									<input type="text" id="superior_estudio" name="superior_estudio" value="hola">
 								</div>
 								<div class="ilblck">
 									<p>Año finalización:</p>
@@ -216,14 +217,54 @@
 									<input type="text" id="superior_tarjeta" name="superior_tarjeta">
 								</div>
 								<div class="">
-									<button type="submit" formmethod="post" formaction="./agregaredusuperior"
-										class="boton-index-agregar btn btn-default">Agregar</button>
+									<button type="submit" formmethod="post" formaction="./edutaredusuperior"
+										class="boton-index-agregar btn btn-default">Edutar</button>
 									<button type="submit" formmethod="post"
 										class="boton-index-eliminar btn btn-default">Eliminar</button>
 								</div>
 							</form>
 						</div>
 					</div>
+					<%}else{%>
+						<div class="fondoBlanco">
+							<div class="submo">
+								<form method="POST" >
+									<div class="ilblck middle">
+										<div class="ilblck-middle">
+											<p>Modalidad academica:</p>
+											<select class="middle-select" name="superior_modalidad" id="superior_modalidad">
+												<option value="tc">TC (Técnica)</option>
+												<option value="es">ES (Especialización)</option>
+												<option value="tl">TL (Tecnológica)</option>
+												<option value="mg">MG (Maestría o Magister)</option>
+												<option value="te">TE (Tecnológica especializaada)</option>
+												<option value="doc">DOC (Doctorado o PHD)</option>
+												<option value="un">UN (Universitaria)</option>
+											</select>
+										</div>
+									</div>
+									<div class="ilblck">
+										<p>Nombre estudios:</p>
+										<input type="text" id="superior_estudio" name="superior_estudio">
+									</div>
+									<div class="ilblck">
+										<p>Año finalización:</p>
+										<input type="text" id="superior_anio" name="superior_anio">
+									</div>
+									<div class="ilblck">
+										<p>No. de Tarjeta Profesinal:</p>
+										<input type="text" id="superior_tarjeta" name="superior_tarjeta">
+									</div>
+									<div class="">
+										<button type="submit" formmethod="post" formaction="./agregaredusuperior"
+											class="boton-index-agregar btn btn-default">Agregar</button>
+										<button type="submit" formmethod="post"
+											class="boton-index-eliminar btn btn-default">Eliminar</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<%}%>
 				</article>
 
 				<template id="clon">

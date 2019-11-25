@@ -37,16 +37,25 @@ async function enviarMail(email, nombre, apellido) {
         html: '<b>Bienvenido a Tu Hoja de Vida online, para comenzar Inicia sesion</b>' // html body
     });
 
-    console.log('Message sent: %s', info.messageId);
+    //console.log('Message sent: %s', info.messageId);
 
 
 
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    //console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
 }
 
-enviarMail().catch(console.error);
+enviarMail().catch();
 
+function reload(req,res,message,error){
+    return res.status(200).render('html/index', {
+        user: req.session.user,
+        educacion: req.session.educacionBasica,
+        educacionSuperior: req.session.educacionSuperior,
+        message:message,
+        error:error
+    });
+}
 
 function subirFoto(req, res) {
 
@@ -76,18 +85,19 @@ function subirFoto(req, res) {
                 if (err) return res.status(500).send({ message: err });
                 req.getConnection((err, conn) => {
                     conn.query('UPDATE persona SET ? WHERE documento = ?', [{ imagen: documento + '.png' }, req.session.user.documento], (err, imagenUpdate) => {
-                        var newUser = req.session.user;
-                        newUser.imagen = documento + '.png';
+                       req.session.user.imagen = documento + '.png';
                         if (!imagenUpdate) {
+                            return reload(req,res,'Ha ocurrido un error', true);
                             return res.status(200).render('html/index', {
                                 message: 'Ha ocurrido un error',
-                                user: newUser,
+                                user: req.session.user,
                                 error: true
                             });
                         } else {
+                            return reload(req,res,'Actualizada Correctamente', false);
                             return res.status(200).render('html/index', {
                                 message: 'Actualizada correctamente',
-                                user: newUser,
+                                user: req.session.user,
                                 error: false
                             });
                         }
@@ -96,6 +106,7 @@ function subirFoto(req, res) {
 
             });
         } else {
+            return reload(req,res,'Archivo no es una imagen', true);
             return res.status(200).render('html/index', {
                 message: 'Archivo no es una imagen',
                 user: req.session.user,
@@ -256,10 +267,10 @@ function addEduSuperior(req, res) {
                         user: userR
                     });
                 } else {
-                    var postgrado_persona = new Object();
-                    postgrado_persona.documento_persona = req.session.user.documento;
-                    postgrado_persona.num_tarjeta = params.superior_tarjeta;
-                    conn.query('INSERT INTO postgrado_persona set ?', [postgrado_persona], (err, newformacion) => {
+                    var pregrado_persona = new Object();
+                    pregrado_persona.documento_persona = req.session.user.documento;
+                    pregrado_persona.num_tarjeta = params.superior_tarjeta;
+                    conn.query('INSERT INTO pregrado_persona set ?', [pregrado_persona], (err, newformacion) => {
                         if (!newformacion) {
                             return res.status(200).render('html/index', {
                                 message: 'Error al Agregar',
@@ -317,10 +328,10 @@ function addExperiecia(req, res) {
                         error: true
                     });
                 } else {
-                    var postgrado_persona = new Object();
-                    postgrado_persona.documento_persona = req.session.user.documento;
-                    postgrado_persona.id_experiencia = id;
-                    conn.query('INSERT INTO trabajos set ?', [postgrado_persona], (err, newexp) => {
+                    var exp = new Object();
+                    exp.documento_persona = req.session.user.documento;
+                    exp.id_experiencia = id;
+                    conn.query('INSERT INTO trabajos set ?', [exp], (err, newexp) => {
                         if (!newexp) {
                             return res.status(200).render('html/index', {
                                 message: 'Error al Agregar',
@@ -404,11 +415,13 @@ function getEdubasica(req, res, callback) {
     req.getConnection((err, conn) => {
         var sql = 'SELECT * FROM formacion_persona WHERE documento_persona = ?';
          conn.query(sql, [String(req.session.user.documento)], (err, eduBasica) => {
-            if (eduBasica) {
+            if (eduBasica.length>0) {
                 var sql = 'SELECT * FROM formacion_academica WHERE id_formacion = ?';
                  conn.query(sql, [String(eduBasica[0].id_formacion)], (err, educacion) => {
                     if (educacion) {
                         req.session.educacionBasica = educacion[0];
+                        return callback();
+                    }else{
                         return callback();
                     }
                 });
@@ -417,26 +430,36 @@ function getEdubasica(req, res, callback) {
     });
 }
 
+function getEduSuperior(req, res) {
+    req.getConnection((err, conn) => {
+        var sql = 'SELECT * FROM pregrado_persona WHERE documento_persona = ?';
+         conn.query(sql, [String(req.session.user.documento)], (err, eduSuperior) => {
+             var educacionSup = [];
+            eduSuperior.forEach(element => {
+                 var sql = 'SELECT * FROM educacion_superior WHERE num_tarjetaProfesional = ?';
+                    conn.query(sql, [String(element.num_tarjeta)], (err, educacion) => {
+                       if (educacion) {
+                           educacionSup.push(educacion[0]);
+                       }
+                   }); 
+             });
+             
+            req.session.educacionSuperior = educacionSup;
+        });
+    });
+}
 
 function addDescripcion(req, res) {
     //console.log('params descripcion');
     //console.log(req.body);
     req.getConnection((err, conn) => {
         conn.query('UPDATE persona SET ? WHERE documento = ?', [{ descripcion: req.body.descripcion }, req.session.user.documento], (err, descripcionUpdated) => {
-            var newUser = req.session.user;
-            newUser.descripcion = req.body.descripcion;
+           req.session.user.descripcion = req.body.descripcion;
             if (!descripcionUpdated) {
-                return res.status(200).render('html/index', {
-                    message: 'Ha ocurrido un error',
-                    user: newUser,
-                    error: true
-                });
+                return reload(req,res,'Ha Ocurrido un error', true);
+                
             } else {
-                return res.status(200).render('html/index', {
-                    message: 'Actualizada correctamente',
-                    user: newUser,
-                    error: false
-                });
+                return reload(req,res,'Actualizada Correctamente', false);
             }
         });
     });
@@ -501,26 +524,26 @@ function login(req, res) {
                  bcrypt.compare(password, users[0].password, (err, check) => {//comparo la del POST con la encriptada
 
                     if (check) {
+                        console.log('hola');
                         users[0].password = undefined;
-                        const token = jwt.createToken(users[0]);
-
+                        //const token = jwt.createToken(users[0]);
                         // en caso de que la app requiera uso de tokens
-                        if (params.gettoken) {
+                       // if (params.gettoken) {
                             //generar y devolver token
-                            return res.status(200).header('Authorization', token).send({
-                                token: jwt.createToken(users[0])
-                            });
-                        }
+                         //   return res.status(200).header('Authorization', token).send({
+                           //     token: jwt.createToken(users[0])
+                           // });
+                       // }
 
                         req.session.user = users[0];
-                        console.log('session');
-                        console.log(req.session.user);
-                        return getEdubasica(req, res, function(){
-                            return res.status(200).render('html/index', {
-                                user: req.session.user,
-                                educacion: req.session.educacionBasica,
-                            });
+                        //console.log('session');
+                        //console.log(req.session.user);
+                       
+                        getEduSuperior(req, res);
+                        return getEdubasica(req, res ,function(){
+                            return reload(req,res);
                         });
+                        
                     } else {
                         return res.status(200).render('html/login', {
                             message: 'Documento o Contraseña Incorrecta',
@@ -553,7 +576,8 @@ module.exports = {
     addEduSuperior,
     addExperiecia,
     addDescripcion,
-    getEdubasica
+    getEdubasica,
+    getEduSuperior
 
 
 }
