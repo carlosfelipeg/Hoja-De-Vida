@@ -187,6 +187,7 @@
 					</button>
 
 					<% if (educacionSuperior) { %>
+						<% for (var i=0;i<educacionSuperior.length; i++) { %>	
 					<div class="fondoBlanco">
 						<div class="submo">
 							<form method="POST" >
@@ -194,6 +195,21 @@
 									<div class="ilblck-middle">
 										<p>Modalidad academica:</p>
 										<select class="middle-select" name="superior_modalidad" id="superior_modalidad">
+											<% if (educacionSuperior[i].modalidad=="tc") { %>
+												<option value="tc">TC (Técnica)</option>
+												<%}else if (educacionSuperior[i].modalidad=="es") { %>
+													<option value="es">ES (Especialización)</option>
+														<%}else if (educacionSuperior[i].modalidad=="tl") { %>
+															<option value="tl">TL (Tecnológica)</option>
+															<%}else if (educacionSuperior[i].modalidad=="mg") { %>
+																<option value="mg">MG (Maestría o Magister)</option>
+																<%}else if (educacionSuperior[i].modalidad=="te") { %>
+																	<option value="te">TE (Tecnológica especializaada)</option>
+																	<%}else if (educacionSuperior[i].modalidad=="doc") { %>
+																		<option value="doc">DOC (Doctorado o PHD)</option>
+																		<%}else if (educacionSuperior[i].modalidad=="un") { %>
+																			<option value="un">UN (Universitaria)</option>
+																			<%}%>
 											<option value="tc">TC (Técnica)</option>
 											<option value="es">ES (Especialización)</option>
 											<option value="tl">TL (Tecnológica)</option>
@@ -206,15 +222,15 @@
 								</div>
 								<div class="ilblck">
 									<p>Nombre estudios:</p>
-									<input type="text" id="superior_estudio" name="superior_estudio" value="hola">
+									<input type="text" id="superior_estudio" name="superior_estudio" value="<%=educacionSuperior[i].nombre_estudio%>">
 								</div>
 								<div class="ilblck">
 									<p>Año finalización:</p>
-									<input type="text" id="superior_anio" name="superior_anio">
+									<input type="text" id="superior_anio" name="superior_anio"  value="<%=educacionSuperior[i].anio_finalizacion%>">
 								</div>
 								<div class="ilblck">
-									<p>No. de Tarjeta Profesinal:</p>
-									<input type="text" id="superior_tarjeta" name="superior_tarjeta">
+									<p>No. de Tarjeta Profesional:</p>
+									<input type="text" id="superior_tarjeta" name="superior_tarjeta"  value="<%=educacionSuperior[i].num_tarjetaProfesional%>">
 								</div>
 								<div class="">
 									<button type="submit" formmethod="post" formaction="./edutaredusuperior"
@@ -225,6 +241,7 @@
 							</form>
 						</div>
 					</div>
+					<%}%>
 					<%}else{%>
 						<div class="fondoBlanco">
 							<div class="submo">
@@ -294,7 +311,7 @@
 									<input type="text" id="superior_anio2" name="superior_anio2">
 								</div>
 								<div class="ilblck">
-									<p>No. de Tarjeta Profesinal:</p>
+									<p>No. de Tarjeta Profesional:</p>
 									<input type="text" id="superior_tarjeta2" name="superior_tarjeta2">
 								</div>
 								<div class="">

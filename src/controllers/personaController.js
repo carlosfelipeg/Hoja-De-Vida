@@ -50,8 +50,8 @@ enviarMail().catch();
 function reload(req,res,message,error){
     return res.status(200).render('html/index', {
         user: req.session.user,
-        educacion: req.session.educacionBasica,
-        educacionSuperior: req.session.educacionSuperior,
+        educacion:req.session.educacionBasica,
+        educacionSuperior:req.session.educacionSuperior,
         message:message,
         error:error
     });
@@ -88,18 +88,8 @@ function subirFoto(req, res) {
                        req.session.user.imagen = documento + '.png';
                         if (!imagenUpdate) {
                             return reload(req,res,'Ha ocurrido un error', true);
-                            return res.status(200).render('html/index', {
-                                message: 'Ha ocurrido un error',
-                                user: req.session.user,
-                                error: true
-                            });
                         } else {
                             return reload(req,res,'Actualizada Correctamente', false);
-                            return res.status(200).render('html/index', {
-                                message: 'Actualizada correctamente',
-                                user: req.session.user,
-                                error: false
-                            });
                         }
                     });
                 });
@@ -107,11 +97,6 @@ function subirFoto(req, res) {
             });
         } else {
             return reload(req,res,'Archivo no es una imagen', true);
-            return res.status(200).render('html/index', {
-                message: 'Archivo no es una imagen',
-                user: req.session.user,
-                error: true
-            });
         }
     } else {
         return res.status(200).send({
@@ -450,8 +435,6 @@ function getEduSuperior(req, res) {
 }
 
 function addDescripcion(req, res) {
-    //console.log('params descripcion');
-    //console.log(req.body);
     req.getConnection((err, conn) => {
         conn.query('UPDATE persona SET ? WHERE documento = ?', [{ descripcion: req.body.descripcion }, req.session.user.documento], (err, descripcionUpdated) => {
            req.session.user.descripcion = req.body.descripcion;
@@ -472,37 +455,25 @@ function generarPdf(req, res) {
         var file = base + '/src/views/html/pdf.ejs';
 
         var template = fs.readFileSync(file, 'utf-8');
-        //console.log('SESSSS');
-        //console.log(req.session);
         var html = ejs.render(template, req.session);
-        // console.log(html);
-
     } catch (e) {
         console.log(e)
     }
 
     var options = { format: 'Letter' };
 
-    res.status(200).render('html/pdf', {
-        message: 'PDF Creado',
-        user: req.session.user
-    });
-
-    pdf.create(html).toFile('./salida.pdf', function (err, res) {
-        //console.log('DIRNAME');
-        // console.log(__dirname);
-        var file = __dirname + 'salida.pdf';
-        //res.download(file); 
+   
+   pdf.create(html).toFile('./salida.pdf',function (err) {
+        res.download('./salida.pdf', 'hojadevida.pdf');
+        
         if (err) {
             console.log(err);
         } else {
             console.log(res);
         }
     });
-    return res.status(200).render('html/pdf', {
-        message: 'PDF Creado',
-        user: req.session.user
-    });
+   
+    return res.status(200);
 }
 
 function login(req, res) {
@@ -538,7 +509,11 @@ function login(req, res) {
                         req.session.user = users[0];
                         //console.log('session');
                         //console.log(req.session.user);
-                       
+                        fs.unlink('./salida.pdf', function(err) {
+                            if (err) console.log(err);
+                          
+                            console.log('file deleted');
+                        });
                         getEduSuperior(req, res);
                         return getEdubasica(req, res ,function(){
                             return reload(req,res);

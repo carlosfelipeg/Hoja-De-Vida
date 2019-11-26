@@ -157,7 +157,8 @@
 			<p class="txt-title">ACERCA DE MI</p>
 
 			<div class="container-txtarea">
-				<textarea id="" class="txtarea" cols="47" rows="10"></textarea>
+					<input id="" class="campo" type="" name=""readonly value="<%=user.descripcion%>">
+				
 			</div>
 		</article>
 	</section>
@@ -167,18 +168,18 @@
 			<p class="txt-title">EDUCACIÓN BASICA</p>
 
 			<div class="container-txt">
-				<p class="txt-lista">Titulo obtenido:</p>
-				<input id="" class="campo" type="" name="">
-			</div>
-
-			<div class="container-txt">
-				<p class="txt-lista">Fecha de grado:</p>
-				<input id="" class="campo" type="" name="">
-			</div>
-
-			<div class="container-txt">
 				<p class="txt-lista">Nombre de institución academica:</p>
-				<input id="" class="campo" type="" name="">
+				<input id="" class="campo" type="" name="" value="<%=educacionBasica.nombre_institucion%>">
+			</div>
+
+			<div class="container-txt">
+				<p class="txt-lista">Año de grado:</p>
+				<input id="" class="campo" type="" name="" value="<%=educacionBasica.anio_grado%>">
+			</div>
+
+			<div class="container-txt">
+				<p class="txt-lista">Pais:</p>
+				<input id="" class="campo" type="" name="" value="<%=educacionBasica.pais_origen%>">
 			</div>
 		</article>
 	</section>
